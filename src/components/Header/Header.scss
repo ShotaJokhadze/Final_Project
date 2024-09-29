@@ -51,9 +51,18 @@
             display: block;
             font-weight: 500;
             line-height: 1.5rem;
+            transition: all 0.2s ease;
 
             &:hover {
               color: rgb(239 68 68);
+            }
+          }
+
+          a.active {
+            color: rgb(239 68 68);
+
+            &:hover {
+              color: rgb(22, 28, 45);
             }
           }
         }
