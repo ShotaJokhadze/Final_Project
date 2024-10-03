@@ -11,13 +11,14 @@ export default function Assignment3() {
     imageURL: 'https://example.com/images/product-10002.jpg',
   };
 
-  const rows = Object.keys(obj).map((key, index) => (
+  const rows = Object.keys(obj).reduce((acc, key, index) => [
+    ...acc,
     <tr key={key}>
       <td>{key}</td>
       <td>{obj[key]}</td>
       <td>{index}</td>
     </tr>
-  ));
+  ], []);
 
   return (
     <div>
