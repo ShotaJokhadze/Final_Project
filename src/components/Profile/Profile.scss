@@ -1,0 +1,43 @@
+.profile-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #323232;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 16rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-photo {
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+
+  input[readonly] {
+    background-color: #eaeaea;
+  }
+}
