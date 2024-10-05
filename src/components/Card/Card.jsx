@@ -13,7 +13,10 @@ export default function Card(props) {
       <div className="card-descr">
         <h3>{header}</h3>
         <p>{content}</p>
-        <button>Add to Cart</button>
+        <div className="buttons">
+          <a href='#'>View Product</a>
+          <a href='#'>Add to Cart</a>
+        </div>
       </div>
     </div>
   )

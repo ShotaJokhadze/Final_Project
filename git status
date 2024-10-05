@@ -1,0 +1,77 @@
+[33mcommit ff2001dbbed97f0b58b2b3793e69ac38ce6e4a4f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Thu Oct 3 19:02:20 2024 +0400
+
+    write assignment3 with reduce
+
+[33mcommit d5b32a33dcd9c26f8c58e4d2d11fc817a119e3d9[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Thu Oct 3 15:54:07 2024 +0400
+
+    create data file, map content from data, add profile page, add blogs page
+
+[33mcommit 34c1d68dcdc170c9e2935298dc89c1a63b4aa798[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Sun Sep 29 14:43:12 2024 +0400
+
+    adjust about paragraph
+
+[33mcommit 955f54bb02d1f76c6db7446efee2342a34c6e8c8[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Sun Sep 29 14:41:04 2024 +0400
+
+    add about and assignment content
+
+[33mcommit 439dd2865d70995950e2b6a3cf472ff97bfed3fd[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Sun Sep 29 14:21:45 2024 +0400
+
+    add Contact component
+
+[33mcommit 70ba490623b46b821663b1b12c3178956fc5a8e0[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Sun Sep 29 14:13:23 2024 +0400
+
+    add react-router, adjust code to make it work
+
+[33mcommit 41ac6f26b31f881914969ef002cdf3dbffa6e2da[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Sat Sep 28 16:55:04 2024 +0400
+
+    Modify navbar for routing, Correct mistakes from ESLint
+
+[33mcommit 11ae27ed8ebb13ac518a3e48aa5e41d1245d5bc8[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Thu Sep 26 21:38:36 2024 +0400
+
+    add folder for each element add product cards for main content
+
+[33mcommit 80bdb365ea04e6975cfd116c77de81c94b207766[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Thu Sep 26 13:42:41 2024 +0400
+
+    add overflow-hidden
+
+[33mcommit fcafaa9fa2c48fa3bad40d02c5bd1a987d5877f2[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Thu Sep 26 13:37:53 2024 +0400
+
+    add overflow-hidden
+
+[33mcommit 42284b954f78e988079f67d2c301d814340b3358[m
+Author: Shota Jokhadze <119611554+ShotaJokhadze@users.noreply.github.com>
+Date:   Sun Sep 22 20:52:48 2024 +0400
+
+    Update App.css
+
+[33mcommit d47e701c504314dff8a1f5bfa5d93f33e5584c64[m
+Author: Shota Jokhadze <119611554+ShotaJokhadze@users.noreply.github.com>
+Date:   Sun Sep 22 20:50:54 2024 +0400
+
+    Update README.md
+
+[33mcommit aebcd3691f6a3b4cb9012dd2b079a66f7cdde5bd[m
+Author: Shota Jokhadze <jokhadzeshota8@gmail.com>
+Date:   Sun Sep 22 20:49:01 2024 +0400
+
+    first commit
