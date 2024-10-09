@@ -1,5 +1,5 @@
-import './Profile.scss';
-import { user } from '../../data'
+import "./Profile.scss";
+import { user } from "../data";
 
 export default function Profile() {
   return (
@@ -8,7 +8,7 @@ export default function Profile() {
       <form className="profile-form">
         <div className="form-group">
           <img
-            src={user.photo}
+            src={user.photo.src}
             alt="User"
             className="profile-photo"
             id="profile-photo"

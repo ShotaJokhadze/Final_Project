@@ -1,12 +1,12 @@
 import './Blogs.scss';
-import { blogPosts } from '../../data';
+// import { blogPosts } from '../../../../data';
 
 export default function Blogs() {
   return (
     <div className="blog-page">
       <h2>Our Blogs</h2>
       <div className="blog-list">
-        {blogPosts.map(post => (
+        {/* {blogPosts.map(post => (
           <div key={post.id} className="blog-card">
             <div className="blog-img">
               <img src={post.image} alt={post.title} />
@@ -18,7 +18,7 @@ export default function Blogs() {
             </div>
 
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

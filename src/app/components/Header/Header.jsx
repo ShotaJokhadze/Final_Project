@@ -1,6 +1,8 @@
+'use client'
+
 import './Header.scss';
-import { NavLink } from 'react-router-dom';
-import userImg from '../../assets/user.jpg';
+import Link from 'next/link';
+import userImg from '../../../../public/images/user.jpg';
 import { useState } from 'react';
 
 export default function Header() {
@@ -20,21 +22,21 @@ export default function Header() {
     <nav id='topnav'>
       <div className="navbar-container">
         <div className="logo">
-          <NavLink to="/">Logo</NavLink>
+          <Link href="/">Logo</Link>
         </div>
         <div className="navigation">
           <ul className="navigation-menu">
             <li>
-              <NavLink to="/about">About</NavLink>
+              <Link href="/about">About</Link>
             </li>
             <li>
-              <NavLink to="/contact">Contact Us</NavLink>
+              <Link href="/contact">Contact Us</Link>
             </li>
             <li>
-              <NavLink to="/assignment3">Assignment 3</NavLink>
+              <Link href="/assignment3">Assignment 3</Link>
             </li>
             <li>
-              <NavLink to='/blogs'>Blogs</NavLink>
+              <Link href='/blogs'>Blogs</Link>
             </li>
           </ul>
         </div>
@@ -46,9 +48,9 @@ export default function Header() {
               onClick={handleClick}
               onBlur={handleBlur}
             >
-              <img src={userImg} alt="User" />
+              <img src={userImg.src} alt="User" />
               <ul className={`user-submenu ${isOpen ? 'open' : ''}`}>
-                <li><NavLink to='/profile'>Profile</NavLink></li>
+                <li><Link href='/profile'>Profile</Link></li>
                 <li><a>Settings</a></li>
                 <li><a>Logout</a></li>
               </ul>
