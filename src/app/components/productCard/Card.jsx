@@ -1,9 +1,10 @@
+import { ProductButton } from '../Button/Buttons'
 import './Cards.scss'
 
 
 export default function Card(props) {
 
-  const { src, header, content } = props
+  const { id, src, header, content } = props
 
   return (
     <div className="card">
@@ -14,8 +15,8 @@ export default function Card(props) {
         <h3>{header}</h3>
         <p>{content}</p>
         <div className="buttons">
-          <a href='#'>View Product</a>
-          <a href='#'>Add to Cart</a>
+          <ProductButton id={id} />
+          <button>Add to Cart</button>
         </div>
       </div>
     </div>

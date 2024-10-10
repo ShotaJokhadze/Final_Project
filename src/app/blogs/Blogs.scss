@@ -1,6 +1,6 @@
 .blog-page {
-  
-
+  height: 100%;
+  margin-top: 20px;
   h2 {
     text-align: center;
     margin-bottom: 30px; 
@@ -44,7 +44,7 @@
         padding: 10px; 
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         flex: 1;
 
         h2 {
@@ -56,6 +56,12 @@
           font-size: 0.9rem; 
           color: #ddd;
           margin: 5px 0;
+          display: -webkit-box;
+          line-clamp: 5;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

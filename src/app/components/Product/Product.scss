@@ -1,0 +1,43 @@
+.product-page {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+  height: 80%;
+  position: relative;
+ 
+  .product-image {
+    height: 100%;
+    width: 50%;
+
+    img {
+      height: 100%;
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  }
+  .product-content {
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    
+
+    .product-category {
+      background-color: rgba(255, 255, 255, 0.651);
+      width: fit-content;
+      padding: 5px;
+      border-radius: 10px;
+      color: black;
+      
+    }
+
+    .product-feature {
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+    }
+  }
+}
