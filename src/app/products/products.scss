@@ -1,8 +1,55 @@
-.card-container {
-  height: 100%; 
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+.products-page {
   padding: 10px;
-}
+
+  .sort-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .dropdown {
+      position: relative;
+      border-radius: 4px;
+      padding: 5px;
+      background-color: transparent;
+      cursor: pointer;
+      user-select: none;
+      color: white;
+      background-color: #1e1e1e;
+      
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #1a1a1a;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 5px;
+        list-style: none;
+        padding: 0;
+        z-index: 10;
+
+        li {
+          padding: 5px;
+          text-wrap: nowrap;
+          cursor: pointer;
+          transition: background 0.3s;
+
+          &:hover {
+            background-color: #393939;
+          }
+        }
+      }
+    }
+  }
+
+  .card-container {
+    height: 100%; 
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+} 
+

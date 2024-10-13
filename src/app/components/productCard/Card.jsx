@@ -4,7 +4,7 @@ import './Cards.scss'
 
 export default function Card(props) {
 
-  const { id, src, header, content } = props
+  const { id, src, header, content, price } = props
 
   return (
     <div className="card">
@@ -14,6 +14,7 @@ export default function Card(props) {
       <div className="card-descr">
         <h3>{header}</h3>
         <p>{content}</p>
+        <span>{price}</span>
         <div className="buttons">
           <ProductButton id={id} />
           <button>Add to Cart</button>

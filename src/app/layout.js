@@ -12,11 +12,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div id="root">
-          <Header />
-          <div className="hero">
-            <div className="hero-container">{children}</div>
+          <div className="page">
+            <Header />
+            <div className="hero">
+              <div className="hero-container">{children}</div>
+            </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
       </body>
     </html>
