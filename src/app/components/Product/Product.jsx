@@ -12,7 +12,7 @@ export default function Product(props) {
         {firstImage ? (
           <img src={firstImage} alt={title} />
         ) : (
-          <p className="product-image__fallback">No image available</p>
+          <p className="product-image">No image available</p>
         )}
       </div>
 
