@@ -6,41 +6,40 @@ import Card from "../components/productCard/Card";
 
 const url = "https://dummyjson.com/products";
 
-async function getProducts() {
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.products;
-}
+const fetchProducts = async (sortBy, order) => {
+  const res = await fetch(`${url}?sortBy=${sortBy}&order=${order}`);
+  const { products } = await res.json();
+  return products;
+};
 
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const [sortOrder, setSortOrder] = useState("asc");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [sortBy, setSortBy] = useState(
+    localStorage.getItem("sortBy") || "title"
+  );
+  const [sortOrder, setSortOrder] = useState(
+    localStorage.getItem("sortOrder") || "asc"
+  );
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
-    (async () => {
+    const getSortedProducts = async () => {
       try {
-        const fetchedProducts = await getProducts();
+        const fetchedProducts = await fetchProducts(sortBy, sortOrder);
         setProducts(fetchedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
-    })();
-  }, []);
+    };
+    getSortedProducts();
+  }, [sortBy, sortOrder]);
 
-  const sortedProducts = [...products].sort((a, b) =>
-    sortOrder === "asc" ? a.price - b.price : b.price - a.price
-  );
-
-  const handleSortChange = (order) => {
+  const handleSortChange = (newSortBy, order) => {
+    setSortBy(newSortBy);
     setSortOrder(order);
-    setIsDropdownOpen(false);
-  };
-
-  const handleBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
-      setIsDropdownOpen(false);
-    }
+    localStorage.setItem("sortBy", newSortBy);
+    localStorage.setItem("sortOrder", order);
+    setDropdownOpen(false);
   };
 
   return (
@@ -49,26 +48,35 @@ export default function Products() {
         <label>Sort by:</label>
         <div
           className="dropdown"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           tabIndex={0}
-          onBlur={handleBlur}
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          onBlur={() => setDropdownOpen(false)}
         >
           <div className="dropdown-selected">
-            {sortOrder === "asc" ? "Price Low to High" : "Price High to Low"}
+            {sortBy === "price"
+              ? `Price ${sortOrder === "asc" ? "Low to High" : "High to Low"}`
+              : `Title ${sortOrder === "asc" ? "A-Z" : "Z-A"}`}
           </div>
-          {isDropdownOpen && (
+          {dropdownOpen && (
             <ul className="dropdown-menu">
-              <li onClick={() => handleSortChange("asc")}>Price Low to High</li>
-              <li onClick={() => handleSortChange("desc")}>
+              <li onClick={() => handleSortChange("price", "asc")}>
+                Price Low to High
+              </li>
+              <li onClick={() => handleSortChange("price", "desc")}>
                 Price High to Low
+              </li>
+              <li onClick={() => handleSortChange("title", "asc")}>
+                Title A-Z
+              </li>
+              <li onClick={() => handleSortChange("title", "desc")}>
+                Title Z-A
               </li>
             </ul>
           )}
         </div>
       </div>
-
       <div className="card-container">
-        {sortedProducts.map((product) => (
+        {products.map((product) => (
           <Card
             key={product.id}
             id={product.id}
