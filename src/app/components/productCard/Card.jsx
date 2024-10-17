@@ -1,6 +1,6 @@
 import { ProductButton } from '../Button/Buttons'
 import './Cards.scss'
-
+import Image from 'next/image'
 
 export default function Card(props) {
 
@@ -9,7 +9,8 @@ export default function Card(props) {
   return (
     <div className="card">
       <div className="card-img">
-        <img src={src} alt="" />
+        <Image src={src} alt="" width={100} priority
+          height={100} />
       </div>
       <div className="card-descr">
         <h3>{header}</h3>
