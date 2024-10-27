@@ -1,9 +1,9 @@
 "use client";
 
 import "./Blogs.scss";
-import { PostsButton } from "../components/Button/Buttons";
+import { PostsButton } from "../../components/Button/Buttons";
 import { useEffect, useState } from "react";
-import BlogsModal from "../components/BlogsModal/BlogsModal";
+import BlogsModal from "../../components/BlogsModal/BlogsModal";
 
 const url = "https://dummyjson.com/posts";
 

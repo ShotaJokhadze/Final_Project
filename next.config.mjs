@@ -10,6 +10,12 @@ const nextConfig = {
         port: "",
         pathname: "/**", // Adjust the path as needed; this allows all paths under the domain
       },
+      {
+        // Allow images from dummyjson.com
+        protocol: "https",
+        hostname: "dummyjson.com",
+        pathname: "/**", // Allows all paths under dummyjson.com
+      },
     ],
   },
 };

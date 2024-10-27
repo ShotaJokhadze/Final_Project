@@ -1,7 +1,7 @@
 import "./products.scss";
-import Card from "../components/productCard/Card";
-import SearchBar from "../components/Search/search";
-import Sort from "../components/Sort/sort";
+import Card from "../../components/productCard/Card";
+import SearchBar from "../../components/Search/search";
+import Sort from "../../components/Sort/sort";
 
 let url = "https://dummyjson.com/products";
 
