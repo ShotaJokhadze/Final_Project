@@ -2,7 +2,7 @@
 
 import './Header.scss';
 import Link from 'next/link';
-import userImg from '../../../../public/images/user.jpg';
+import userImg from '../../public/images/user.jpg'
 import { useState } from 'react';
 
 export default function Header() {
@@ -26,6 +26,9 @@ export default function Header() {
         </div>
         <div className="navigation">
           <ul className="navigation-menu">
+            <li>
+              <Link href="/products">Products</Link>
+            </li>
             <li>
               <Link href="/about">About</Link>
             </li>

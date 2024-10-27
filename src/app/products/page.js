@@ -27,7 +27,6 @@ export default async function Products({ searchParams }) {
   const data = await res.json();
   const products = data.products;
 
-  // console.log(queryUrl);
   return (
     <div className="products-page">
       <div className="filter-container">

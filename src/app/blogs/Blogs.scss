@@ -1,6 +1,16 @@
 .blog-page {
   height: 100%;
   margin-top: 20px;
+
+  .blog-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    button {
+      padding: 5px;
+    }
+  }
   h2 {
     text-align: center;
     margin-bottom: 30px; 
@@ -8,14 +18,14 @@
   }
 
   .blog-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr auto;
     justify-content: center;
     gap: 20px;
 
     .blog-card {
       background-color: #1e1e1e;
-      width: 15rem;
+      width: 20rem;
       display: flex;
       flex-direction: column;
       height: auto;
@@ -62,6 +72,11 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+
+        .blog-buttons {
+          display: flex;
+          justify-content: space-between;
         }
       }
     }

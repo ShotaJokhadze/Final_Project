@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 100%;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -63,7 +67,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
 
 @media (prefers-color-scheme: light) {

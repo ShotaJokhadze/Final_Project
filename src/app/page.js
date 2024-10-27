@@ -1,6 +1,6 @@
-import Products from "./products/page";
 import "./app.scss";
+import HomePage from "./home/page";
 
 export default function Home() {
-  return <Products />;
+  return <HomePage />;
 }
