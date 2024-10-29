@@ -2,21 +2,13 @@
 
 import './Header.scss';
 import Link from 'next/link';
-import userImg from '../../public/images/user.jpg'
-import { useState } from 'react';
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
-      setIsOpen(false);
-    }
-  };
+  function handleLogout() {
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
+    window.location.href = "/Login";
+  }
 
   return (
     <nav id='topnav'>
@@ -41,24 +33,13 @@ export default function Header() {
             <li>
               <Link href='/blogs'>Blogs</Link>
             </li>
+            <li>
+              <Link href='/profile'>Profile</Link>
+            </li>
           </ul>
         </div>
-        <div className="profile">
-          <div className="user-container">
-            <div
-              className="user"
-              tabIndex={0}
-              onClick={handleClick}
-              onBlur={handleBlur}
-            >
-              <img src={userImg.src} alt="User" />
-              <ul className={`user-submenu ${isOpen ? 'open' : ''}`}>
-                <li><Link href='/profile'>Profile</Link></li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-              </ul>
-            </div>
-          </div>
+        <div className="logout">
+          <button onClick={handleLogout}>logout</button>
         </div>
       </div>
     </nav>

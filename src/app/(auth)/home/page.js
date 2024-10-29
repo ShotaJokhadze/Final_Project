@@ -1,7 +1,9 @@
+import "./home.scss";
+
 export default function HomePage() {
   return (
-    <main>
+    <div className="home">
       <h1>This is home page</h1>
-    </main>
+    </div>
   );
 }

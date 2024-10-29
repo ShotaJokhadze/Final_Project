@@ -1,27 +1,29 @@
-import './Assignment3.scss'
+import "./Assignment3.scss";
 
 export default function Assignment3() {
-
   const obj = {
-    id: '10002',
-    name: 'Eco-Friendly Water Bottle',
-    description: 'Stay hydrated with our durable, eco-friendly water bottle.',
+    id: "10002",
+    name: "Eco-Friendly Water Bottle",
+    description: "Stay hydrated with our durable, eco-friendly water bottle.",
     price: 14.99,
-    currency: 'USD',
-    imageURL: 'https://example.com/images/product-10002.jpg',
+    currency: "USD",
+    imageURL: "https://example.com/images/product-10002.jpg",
   };
 
-  const rows = Object.keys(obj).reduce((acc, key, index) => [
-    ...acc,
-    <tr key={key}>
-      <td>{key}</td>
-      <td>{obj[key]}</td>
-      <td>{index}</td>
-    </tr>
-  ], []);
+  const rows = Object.keys(obj).reduce(
+    (acc, key, index) => [
+      ...acc,
+      <tr key={key}>
+        <td>{key}</td>
+        <td>{obj[key]}</td>
+        <td>{index}</td>
+      </tr>,
+    ],
+    []
+  );
 
   return (
-    <div>
+    <div className="assignment3">
       <h2>Product Details</h2>
       <table>
         <thead>
@@ -31,9 +33,7 @@ export default function Assignment3() {
             <th>Position</th>
           </tr>
         </thead>
-        <tbody>
-          {rows}
-        </tbody>
+        <tbody>{rows}</tbody>
       </table>
     </div>
   );

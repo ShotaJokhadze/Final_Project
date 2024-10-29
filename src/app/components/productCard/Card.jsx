@@ -7,7 +7,7 @@ export default function Card(props) {
   const { id, src, header, content, price } = props
 
   return (
-    <div className="card">
+    <>
       <div className="card-img">
         <Image src={src} alt="" width={100} priority
           height={100} />
@@ -18,9 +18,10 @@ export default function Card(props) {
         <span>{price}</span>
         <div className="buttons">
           <ProductButton id={id} />
-          <button>Add to Cart</button>
         </div>
       </div>
-    </div>
+    </>
+
+
   )
 }

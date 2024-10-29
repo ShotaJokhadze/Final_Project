@@ -18,8 +18,7 @@ form{
   flex-direction: column;
   align-content: center;
   gap: 0.3rem;
-
-  width: 20rem;
+  width: 30rem;
   margin-top: 2rem;
   padding: 3rem 2rem;
   background-color: rgb(157, 154, 154);
@@ -33,7 +32,7 @@ form{
 }
 
 .login-form h1 {
-  color: white;
+  color: black;
   margin-bottom: 2rem;
 }
 
@@ -53,7 +52,7 @@ form{
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
-  color: white;
+  color: rgb(239, 234, 234);
   text-transform: uppercase;
 }
 
@@ -77,7 +76,7 @@ form{
 
   font-weight: bold;
   cursor: pointer;
-  background-color: white;
+  background-color: gray;
 }
 
 .btn-login:hover {

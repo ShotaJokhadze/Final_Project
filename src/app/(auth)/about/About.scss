@@ -1,5 +1,8 @@
 .about-container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   h2 {
     margin-bottom: 20px;

@@ -32,7 +32,7 @@ const Profile = () => {
   }
 
   return (
-    <main id="profile-page">
+    <div id="profile-page">
       <div className="prof-header-cont">
         <div className="profile-header">
           {user.image && (
@@ -105,7 +105,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
