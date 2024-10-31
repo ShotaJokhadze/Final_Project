@@ -1,42 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#root {
-  width: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --yellow: #feda6a;
+  --light: #d4d4dc;
+  --dark-gray: #1d1e22;
+  --medium-gray: #393f4d;
+  --font1: "DM Sans", sans-serif;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font1);
 }
 
-body {
-  margin: 0;
-  place-items: center;
-  /* min-width: 320px; */
+.page {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--dark-gray);
+  color: var(--light);
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
 }
 
 h1 {
@@ -51,34 +42,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--medium-gray);
+  color: var(--light);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-color: var(--light);
 }
 
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  justify-content: space-between;
-}
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}

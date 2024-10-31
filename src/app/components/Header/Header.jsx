@@ -14,7 +14,7 @@ export default function Header() {
     <nav id='topnav'>
       <div className="navbar-container">
         <div className="logo">
-          <Link href="/">Logo</Link>
+          <Link href="/">Home</Link>
         </div>
         <div className="navigation">
           <ul className="navigation-menu">
