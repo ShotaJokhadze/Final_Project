@@ -14,22 +14,27 @@ export default function AppearanceSwitch() {
     setDropdownOpen(false);
   };
 
-  // useEffect(() => setMounted(true), []);
+  useEffect(() => setMounted(true), []);
 
-  // if (!mounted) return;
+  if (!mounted)
+    return (
+      <div className="p-2 cursor-pointer bg-mediumGray text-light rounded-md min-w-32 text-center">
+        Select Mode
+      </div>
+    );
 
   return (
     <div
-      className="appearance-switch p-2 flex items-center relative cursor-pointer"
+      className="p-2 flex items-center relative cursor-pointer"
       tabIndex={0}
       onBlur={() => setDropdownOpen(false)}
       onClick={() => setDropdownOpen(!dropdownOpen)}
     >
-      <div className="appearance-select bg-mediumGray text-light p-2 rounded-md min-w-32 text-center">
+      <div className="bg-mediumGray text-light p-2 rounded-md min-w-32 text-center hover:border-light hover:border transition-all">
         Theme: {theme[0].toUpperCase() + theme.substring(1)}
       </div>
       {dropdownOpen && (
-        <ul className="appearance-dropdown absolute top-full bg-mediumGray w-full text-light rounded-md">
+        <ul className="absolute top-full bg-mediumGray w-full text-light rounded-md">
           <li
             onClick={() => handleSelectTheme("light")}
             className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"

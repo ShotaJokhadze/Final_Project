@@ -5,7 +5,7 @@ export async function authUser(username, password) {
     body: JSON.stringify({
       username: username,
       password: password,
-      expiresInMins: 30,
+      // expiresInMins: 30,
     }),
   });
   const data = await response.json();

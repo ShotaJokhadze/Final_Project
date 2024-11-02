@@ -22,7 +22,6 @@
   min-height: 100vh;
   justify-content: space-between;
   width: 100%;
-  color: var(--light);
 }
 
 a {
@@ -40,16 +39,10 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: var(--medium-gray);
-  color: var(--light);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
 }
 
 button:hover {

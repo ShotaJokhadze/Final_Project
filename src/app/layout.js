@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <Appearance>
-          <div className="page bg-mediumGray dark:bg-darkGray">
+          <div className="page bg-light text-darkGray dark:bg-darkGray dark:text-light">
             <Header />
             <div className="hero">
               <div className="hero-container">{children}</div>
