@@ -2,6 +2,7 @@
 
 import './Header.scss';
 import Link from 'next/link';
+import AppearanceSwitch from '../AppearanceSwitch/AppearanceSwitch';
 
 export default function Header() {
 
@@ -41,6 +42,7 @@ export default function Header() {
         <div className="logout">
           <button onClick={handleLogout}>logout</button>
         </div>
+        <AppearanceSwitch />
       </div>
     </nav>
   );

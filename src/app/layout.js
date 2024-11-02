@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import { Appearance } from "./Providers/Appearance";
 
 export const metadata = {
   title: "Next App",
@@ -9,15 +10,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <div className="page">
-          <Header />
-          <div className="hero">
-            <div className="hero-container">{children}</div>
+        <Appearance>
+          <div className="page bg-mediumGray dark:bg-darkGray">
+            <Header />
+            <div className="hero">
+              <div className="hero-container">{children}</div>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </Appearance>
       </body>
     </html>
   );
