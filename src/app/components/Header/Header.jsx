@@ -1,15 +1,11 @@
 'use client'
 
-import './Header.scss';
 import Link from 'next/link';
 import AppearanceSwitch from '../AppearanceSwitch/AppearanceSwitch';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function Header() {
-
-  function handleLogout() {
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
-    window.location.href = "/Login";
-  }
+  const { user } = useUser();
 
   return (
     <nav id='topnav' className='bg-darkGray w-full z-50 relative text-light dark:bg-light dark:text-darkGray py-1'>
@@ -53,7 +49,18 @@ export default function Header() {
           </ul>
         </div>
         <div className="flex items-center">
-          <button className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center hover:border-light hover:border transition-all' onClick={handleLogout}>logout</button>
+          {user ? <div className='flex items-center gap-2'>
+            <img className='w-10 rounded-full' src={user.picture} alt="" />
+            <a
+              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center hover:border-light hover:border transition-all'
+              href='/api/auth/logout'>logout
+            </a>
+          </div>
+
+            : <a href="/api/auth/login"
+              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center hover:border-light hover:border transition-all'>
+              login
+            </a>}
           <AppearanceSwitch />
         </div>
 

@@ -11,7 +11,6 @@ export default function Sort() {
   const sortBy = searchParams.get("sortBy");
   const sortOrder = searchParams.get("order");
   const query = searchParams.get("search") || "";
-  console.log(query);
 
   const handleSortChange = (newSortBy, newOrder) => {
     const newUrl = `/products/?search=${query}&sortBy=${newSortBy}&order=${newOrder}`;
