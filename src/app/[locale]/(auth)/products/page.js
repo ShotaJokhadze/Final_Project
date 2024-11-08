@@ -1,15 +1,15 @@
 "use client";
 
 import "./products.scss";
-import Card from "../../components/productCard/Card";
-import SearchBar from "../../components/Search/search";
+import Card from "../../../components/productCard/Card";
+import SearchBar from "../../../components/Search/search";
 import { useEffect, useState } from "react";
-import ProductsModal from "../../components/ProductsModal/ProductsModal";
-import Sort from "../../components/Sort/sort";
+import ProductsModal from "../../../components/ProductsModal/ProductsModal";
+import Sort from "../../../components/Sort/sort";
 
 let url = "https://dummyjson.com/products";
 
-export default function Products({ searchParams }) {
+export default function Products({ searchParams = {} }) {
   const [productList, setProductList] = useState([]);
   const [newProduct, setNewProduct] = useState({
     title: "",
@@ -21,11 +21,10 @@ export default function Products({ searchParams }) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const searchTerm = searchParams?.search || "";
-  const sortOption = searchParams?.sortBy || "";
-  const sortOrder = searchParams?.order || "";
+  const searchTerm = searchParams.search || "";
+  const sortOption = searchParams.sortBy || "";
+  const sortOrder = searchParams.order || "";
 
-  // Function to build the query URL based on search and sort parameters
   const buildQueryUrl = () => {
     let queryUrl = `${url}`;
 
@@ -47,6 +46,7 @@ export default function Products({ searchParams }) {
     const res = await fetch(queryUrl);
     const data = await res.json();
     setProductList(data.products);
+    console.log(data);
   };
 
   useEffect(() => {
