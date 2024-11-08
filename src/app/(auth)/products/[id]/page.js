@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Product from "../../components/Product/Product";
+import Product from "../../Product/Product";
 
 const url = "https://dummyjson.com/products";
 

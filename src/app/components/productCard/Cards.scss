@@ -1,14 +1,3 @@
-.card {
-  border: 1px solid #fffc;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  height: 370px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 5px;
-  max-width: 20rem;
 
   .card-img {
     width: 100%;
@@ -65,4 +54,3 @@
       }
     }
   } 
-}
