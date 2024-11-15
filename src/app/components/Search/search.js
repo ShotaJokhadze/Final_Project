@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
+import { useRouter } from "../../../i18n/routing";
 
 export default function SearchBar({ searchType }) {
   const [searchTerm, setSearchTerm] = useState("");

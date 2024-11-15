@@ -1,0 +1,14 @@
+{
+  "HomePage" : {
+    "title" : "This is home page"
+  },
+  "Header": {
+    "about": "About",
+    "products": "Products",
+    "contact": "Contact us",
+    "blog": "Blog",
+    "profile": "Profile",
+    "logout" : "Logout",
+    "login" : "Login"
+  }
+}

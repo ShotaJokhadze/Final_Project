@@ -37,8 +37,4 @@ button {
   transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
 }
 
-button:hover {
-  border-color: var(--light);
-}
-
 

@@ -1,10 +1,25 @@
 'use client'
 
-import Link from 'next/link';
 import AppearanceSwitch from '../AppearanceSwitch/AppearanceSwitch';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { Link } from '../../../i18n/routing'
+import { useTranslations } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
+import { useState } from 'react';
+
 
 export default function Header() {
+  const t = useTranslations("Header")
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState()
+
+  const changeLanguage = (locale) => {
+    setIsOpen(false);
+    router.push(`/${locale}${pathname.slice(3)}`);
+  }
+
   const { user } = useUser();
 
   return (
@@ -18,18 +33,18 @@ export default function Header() {
             <li className='relative flex items-center h-full'>
               <Link
                 className='block font-medium leading-6 transition-all hover:text-red' href="/products">
-                Products
+                {t("products")}
               </Link>
             </li>
             <li className='relative flex items-center h-full'>
               <Link
                 className='block font-medium leading-6 transition-all hover:text-red'
-                href="/about">About</Link>
+                href="/about">{t("about")}</Link>
             </li>
             <li className='relative flex items-center h-full'>
               <Link
                 className='block font-medium leading-6 transition-all hover:text-red'
-                href="/contact">Contact Us</Link>
+                href="/contact">{t("contact")}</Link>
             </li>
             <li className='relative flex items-center h-full'>
               <Link
@@ -39,29 +54,57 @@ export default function Header() {
             <li className='relative flex items-center h-full'>
               <Link
                 className='block font-medium leading-6 transition-all hover:text-red'
-                href='/blogs'>Blogs</Link>
+                href='/blogs'>{t("blog")}</Link>
             </li>
             <li className='relative flex items-center h-full'>
               <Link
                 className='block font-medium leading-6 transition-all hover:text-red'
-                href='/profile'>Profile</Link>
+                href='/profile'>{t("profile")}</Link>
             </li>
           </ul>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-1">
           {user ? <div className='flex items-center gap-2'>
             <img className='w-10 rounded-full' src={user.picture} alt="" />
             <a
-              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center hover:border-light hover:border transition-all'
-              href='/api/auth/logout'>logout
+              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center'
+              href='/api/auth/logout'>{t("logout")}
             </a>
           </div>
 
             : <a href="/api/auth/login"
-              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center hover:border-light hover:border transition-all'>
-              login
+              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center'>
+              {t("login")}
             </a>}
+
           <AppearanceSwitch />
+          <div className="p-2 flex items-center relative cursor-pointer"
+            tabIndex={0}
+            onBlur={() => setIsOpen(false)}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <div
+              className="bg-mediumGray text-light p-2 rounded-md h-10 flex items-center text-center"
+            >
+              {pathname.includes("/ka") ? "ქარ" : "En"}
+            </div>
+            {isOpen && (
+              <ul className="absolute top-full bg-mediumGray w-full text-light rounded-md p-1">
+                <li
+                  onClick={() => changeLanguage("en")}
+                  className="flex items-center gap-1 cursor-pointer p-2 hover:-translate-y-0.5 transition-all justify-center"
+                >
+                  En
+                </li>
+                <li
+                  onClick={() => changeLanguage("ka")}
+                  className="flex items-center gap-1 cursor-pointer p-2 hover:-translate-y-0.5 transition-all justify-center"
+                >
+                  ქარ
+                </li>
+              </ul>
+            )}
+          </div>
         </div>
 
       </div>
