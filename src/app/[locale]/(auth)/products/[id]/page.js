@@ -1,24 +1,27 @@
 import { notFound } from "next/navigation";
-import Product from "../../Product/Product";
+import Product from "../../../../components/Product/Product";
 
 const url = "https://dummyjson.com/products";
 
 export async function generateStaticParams() {
-  const res = await fetch(url);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch product");
+  }
+
   const data = await res.json();
 
-  return data.products.map((product) => ({
+  return data.map((product) => ({
     id: product.id.toString(),
   }));
 }
 
 async function getProduct(id) {
-  const res = await fetch(`${url}/${id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`
+  );
 
   if (!res.ok) {
-    if (res.status === 404) {
-      return null;
-    }
     throw new Error("Failed to fetch product");
   }
 

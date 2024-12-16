@@ -4,7 +4,7 @@ import AppearanceSwitch from '../AppearanceSwitch/AppearanceSwitch';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Link } from '../../../i18n/routing'
 import { useTranslations } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from 'react';
 
 
@@ -65,7 +65,9 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-1">
           {user ? <div className='flex items-center gap-2'>
-            <img className='w-10 rounded-full' src={user.picture} alt="" />
+            <Link href="/profile">
+              <img className='w-10 rounded-full' src={user.picture} alt="" />
+            </Link>
             <a
               className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center'
               href='/api/auth/logout'>{t("logout")}

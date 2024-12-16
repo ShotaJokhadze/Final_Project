@@ -30,7 +30,7 @@ export default function AppearanceSwitch() {
       onBlur={() => setDropdownOpen(false)}
       onClick={() => setDropdownOpen(!dropdownOpen)}
     >
-      <div className="bg-mediumGray text-light p-2 rounded-md min-w-32 text-center hover:border-light hover:border transition-all">
+      <div className="bg-mediumGray text-light p-2 rounded-md min-w-32 text-center">
         Theme: {theme[0].toUpperCase() + theme.substring(1)}
       </div>
       {dropdownOpen && (

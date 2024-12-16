@@ -1,22 +1,7 @@
 import { getSession } from "@auth0/nextjs-auth0";
-import { redirect } from "next/navigation";
 
 export default async function Profile() {
   const session = await getSession();
-
-  if (!session?.user) {
-    redirect("/api/auth/login");
-  }
-
-  if (session?.error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="p-4 bg-red-100 text-red-700 rounded-lg">
-          {session.error.message}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

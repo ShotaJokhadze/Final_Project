@@ -9,13 +9,13 @@ export default function Card(props) {
   return (
     <>
       <div className="card-img">
-        <Image src={src} alt="" width={100} priority
-          height={100} />
+        {/* <Image src={src} alt="" width={100} priority
+          height={100} /> */}
       </div>
       <div className="card-descr">
         <h3>{header}</h3>
         <p>{content}</p>
-        <span>{price}</span>
+        <span>{price}$</span>
         <div className="buttons">
           <ProductButton id={id} />
         </div>

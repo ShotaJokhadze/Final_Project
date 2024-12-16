@@ -1,102 +1,40 @@
-.products-page {
-  padding: 10px;
-  width: 100%;
+// .products-page {
+//   padding: 10px;
+//   width: 100%;
 
-  .filter-container {
-    gap: 30px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+//   .card-container { 
+//     max-width: 1200px;
+//     display: grid;
+//     grid-template-columns: auto auto auto;
+//     grid-gap: 20px;
+//     align-items: center;
+//     justify-content: center;
+//     align-content: center;
 
-    input {
-      padding: 5px;
-      border-radius: 5px;
-      background-color: transparent;
-      border: 1px solid #fffc;
-      outline: 0;
-    }
+//     .card {
+//       border: 1px solid #fffc;
+//     border-radius: 10px;
+//     overflow: hidden;
+//     position: relative;
+//     height: 390px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     gap: 5px;
+//     max-width: 20rem;
 
-    .sort-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-  
-      .dropdown {
-        position: relative;
-        border-radius: 4px;
-        padding: 5px;
-        background-color: transparent;
-        cursor: pointer;
-        user-select: none;
-        color: white;
-        background-color: #1e1e1e;
-        
-        .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background: #1a1a1a;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          margin-top: 5px;
-          list-style: none;
-          padding: 0;
-          z-index: 10;
-  
-          li {
-            padding: 5px;
-            text-wrap: nowrap;
-            cursor: pointer;
-            transition: background 0.3s;
-  
-            &:hover {
-              background-color: #393939;
-            }
-          }
-        }
-      }
-    }
-  }
+//     .product-actions {
+//       display: flex;
+//       justify-content: space-around;
+//       margin-bottom: 10px;
 
-  .card-container { 
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-
-    .no-results {
-      text-align: left;
-      margin: 20px 0;
-      font-style: italic;
-    }
-
-    .card {
-      border: 1px solid #fffc;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-    height: 390px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 5px;
-    max-width: 20rem;
-
-    .product-actions {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 10px;
-
-      div {
-        background-color: #1a1a1a;
-        padding: 5px;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-    }
-    }
-  }
-
-} 
-
+//       div {
+//         background-color: #1a1a1a;
+//         padding: 5px;
+//         border-radius: 8px;
+//         cursor: pointer;
+//       }
+//     }
+//     }
+//   }
+// }

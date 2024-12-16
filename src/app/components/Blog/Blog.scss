@@ -1,6 +1,9 @@
 .blog-card {
   max-width: 60%;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   // text-align: center;
   
   .blog-title {
@@ -13,7 +16,7 @@
 
   .blog-body {
     font-size: 1rem;
-    color: #bcbcbc;
+    color: grey;
     margin-bottom: 15px;
   }
 
