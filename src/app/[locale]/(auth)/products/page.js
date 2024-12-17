@@ -1,171 +1,70 @@
-"use client";
-
 import "./products.scss";
 import Card from "../../../components/productCard/Card";
-import SearchBar from "../../../components/Search/search";
-import { useEffect, useState } from "react";
-import ProductsModal from "../../../components/ProductsModal/ProductsModal";
-import Sort from "../../../components/Sort/sort";
+import { Pagination } from "../../../components/Pagination/Pagination"; // You'll need to create this component
 
-let url = "https://dummyjson.com/products";
-
-export default function Products({ searchParams = {} }) {
-  const [productList, setProductList] = useState([]);
-  const [newProduct, setNewProduct] = useState({
-    title: "",
-    description: "",
-    price: "",
-    image: "",
+async function fetchProducts() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
+    cache: "no-store",
   });
-  const [editProduct, setEditProduct] = useState(null);
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const searchTerm = searchParams.search || "";
-  const sortOption = searchParams.sortBy || "";
-  const sortOrder = searchParams.order || "";
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
 
-  const buildQueryUrl = () => {
-    let queryUrl = `${url}`;
+  return res.json();
+}
 
-    if (searchTerm) {
-      queryUrl += `/search?q=${searchTerm}`;
-    }
+export default async function ProductsPage({ searchParams }) {
+  let products = [];
+  let fetchError = null;
 
-    if (sortOption) {
-      queryUrl += `${
-        searchTerm ? "&" : "?"
-      }sortBy=${sortOption}&order=${sortOrder}`;
-    }
+  try {
+    products = await fetchProducts();
+  } catch (err) {
+    fetchError = err.message;
+  }
 
-    return queryUrl;
-  };
+  // Pagination logic
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  const productsPerPage = 18;
+  const totalProducts = products.length;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-  const fetchProductsData = async () => {
-    const queryUrl = buildQueryUrl();
-    const res = await fetch(queryUrl);
-    const data = await res.json();
-    setProductList(data.products);
-    console.log(data);
-  };
-
-  useEffect(() => {
-    fetchProductsData();
-  }, [searchTerm, sortOption, sortOrder]);
-
-  const createProduct = () => {
-    const highestId =
-      productList.length > 0
-        ? Math.max(...productList.map((product) => product.id))
-        : 0;
-    const newProductPost = {
-      id: highestId + 1,
-      title: newProduct.title,
-      description: newProduct.description,
-      image: newProduct.image,
-      price: parseFloat(newProduct.price),
-    };
-    const updatedProducts = [newProductPost, ...productList];
-    setProductList(updatedProducts);
-    setNewProduct({ title: "", description: "", price: "", image: "" });
-    setIsCreateModalOpen(false);
-  };
-
-  const updateProduct = () => {
-    if (!editProduct) return;
-
-    const updatedProducts = productList.map((product) =>
-      product.id === editProduct.id
-        ? {
-            ...product,
-            title: editProduct.title,
-            description: editProduct.description,
-            price: parseFloat(editProduct.price),
-            image: editProduct.image,
-          }
-        : product
-    );
-
-    setProductList(updatedProducts);
-    setEditProduct(null);
-    setIsEditModalOpen(false);
-  };
-
-  const deleteProduct = (id) => {
-    const updatedProducts = productList.filter((product) => product.id !== id);
-    setProductList(updatedProducts);
-  };
-
-  const toggleCreateModal = () => {
-    setIsCreateModalOpen(!isCreateModalOpen);
-  };
-
-  const toggleEditModal = (product) => {
-    setEditProduct(product);
-    setIsEditModalOpen(true);
-  };
+  // Slice products for current page
+  const paginatedProducts = products.slice(
+    (page - 1) * productsPerPage,
+    page * productsPerPage
+  );
 
   return (
-    <div className="products-page">
-      <div className="filter-container">
-        <SearchBar searchType="products" />
-        <Sort />
-        <button onClick={toggleCreateModal}>Create Product</button>
+    <div className="products-page p-3 w-full">
+      {fetchError && <p>{fetchError}</p>}
+
+      <div className="card-container grid grid-cols-3 gap-5 place-items-center place-content-center">
+        {paginatedProducts.map((product) => (
+          <div
+            className="card border border-mediumGray rounded-lg overflow-hidden relative h-[390px] flex flex-col justify-around gap-2 max-w-80"
+            key={product.id}
+          >
+            <Card
+              key={product.id}
+              id={product.id}
+              header={product.title}
+              content={product.description}
+              price={product.price}
+            />
+          </div>
+        ))}
       </div>
-      <ProductsModal
-        isOpen={isCreateModalOpen}
-        onClose={toggleCreateModal}
-        title={newProduct.title}
-        body={newProduct.description}
-        price={newProduct.price}
-        image={newProduct.image}
-        setTitle={(title) => setNewProduct({ ...newProduct, title })}
-        setBody={(body) => setNewProduct({ ...newProduct, description: body })}
-        setPrice={(price) => setNewProduct({ ...newProduct, price })}
-        setImage={(image) => setNewProduct({ ...newProduct, image })}
-        onSubmit={createProduct}
-        action="create"
-      />
-      {isEditModalOpen && editProduct && (
-        <ProductsModal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          title={editProduct.title}
-          body={editProduct.description}
-          price={editProduct.price}
-          image={editProduct.image}
-          setTitle={(title) => setEditProduct({ ...editProduct, title })}
-          setBody={(body) =>
-            setEditProduct({ ...editProduct, description: body })
-          }
-          setPrice={(price) => setEditProduct({ ...editProduct, price })}
-          setImage={(image) => setEditProduct({ ...editProduct, image })}
-          onSubmit={updateProduct}
-          action="edit"
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          hasNextPage={page < totalPages}
+          hasPrevPage={page > 1}
         />
       )}
-      <div className="card-container">
-        {productList.length > 0 ? (
-          productList.map((product) => (
-            <div className="card" key={product.id}>
-              <Card
-                key={product.id}
-                id={product.id}
-                src={product.thumbnail || product.image}
-                header={product.title}
-                content={product.description}
-                price={product.price}
-              />
-              <div className="product-actions">
-                <div onClick={() => toggleEditModal(product)}>Edit</div>
-                <div onClick={() => deleteProduct(product.id)}>Delete</div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className="no-results">No products found.</p>
-        )}
-      </div>
     </div>
   );
 }

@@ -20,11 +20,7 @@ export default function Product(props) {
         <h2 className="product-title">{title}</h2>
         <div className="product-category">{category}</div>
         <div className="product-description">{description}</div>
-        <div className="product-feature brand"><p>Brand</p>{brand}</div>
         <div className="product-feature price"><p>Price</p>${price}</div>
-        <div className="product-feature rating"><p>Rating</p>
-          {rating}
-        </div>
       </div>
     </div>
   );
