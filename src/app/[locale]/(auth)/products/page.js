@@ -1,6 +1,5 @@
-import "./products.scss";
 import Card from "../../../components/productCard/Card";
-import { Pagination } from "../../../components/Pagination/Pagination"; // You'll need to create this component
+import { Pagination } from "../../../components/Pagination/Pagination";
 
 async function fetchProducts() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {

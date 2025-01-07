@@ -49,7 +49,7 @@ export default async function LocaleLayout({ children, params }) {
               <div className="page flex flex-col justify-between w-full min-h-screen bg-light text-darkGray dark:bg-darkGray dark:text-light">
                 <Header />
                 <div className="hero flex-1 flex">
-                  <div className="hero-container min-h-full flex justify-center w-4/5 mx-auto max-w-screen-xl">
+                  <div className="hero-container min-h-full flex justify-center w-4/5 mx-auto max-w-screen-xl items-center">
                     {children}
                   </div>
                 </div>
