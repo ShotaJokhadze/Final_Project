@@ -49,11 +49,6 @@ export default function Header() {
             <li className='relative flex items-center h-full'>
               <Link
                 className='block font-medium leading-6 transition-all hover:text-red'
-                href="/assignment3">Assignment 3</Link>
-            </li>
-            <li className='relative flex items-center h-full'>
-              <Link
-                className='block font-medium leading-6 transition-all hover:text-red'
                 href='/blogs'>{t("blog")}</Link>
             </li>
             <li className='relative flex items-center h-full'>
