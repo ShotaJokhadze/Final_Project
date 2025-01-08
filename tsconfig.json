@@ -28,7 +28,7 @@
     "./dist/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/[locale]/(auth)/profile/page.tsx", "src/i18n/request.js", "src/middleware.js", "src/i18n/routing.js"  ],
+, "src/app/[locale]/(auth)/profile/page.tsx", "src/i18n/request.js", "src/middleware.js", "src/i18n/routing.js", "eslint.config.js", "src/app/api/products/[id]/route.ts"  ],
   "exclude": [
     "node_modules"
   ]

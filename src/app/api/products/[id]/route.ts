@@ -1,6 +1,13 @@
 import { supabase } from "../../../../lib/supabase";
 
-export async function GET(request, { params }) {
+interface Params {
+  id: string;
+}
+
+export async function GET(
+  request: Request,
+  { params }: { params: Params }
+): Promise<Response> {
   const { id } = params;
 
   const { data, error } = await supabase
@@ -10,7 +17,7 @@ export async function GET(request, { params }) {
     .single();
 
   if (error) {
-    return new Response(JSON.stringify({ error: "Blog post not found" }), {
+    return new Response(JSON.stringify({ error: "Product not found" }), {
       status: 404,
     });
   }
