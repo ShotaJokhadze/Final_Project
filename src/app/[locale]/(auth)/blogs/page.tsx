@@ -1,5 +1,12 @@
 import { PostsButton } from "../../../components/Button/Buttons";
-async function fetchBlogs() {
+
+interface Blog {
+  id: number;
+  title_en: string;
+  body_en: string;
+}
+
+async function fetchBlogs(): Promise<Blog[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`);
 
   if (!res.ok) {
@@ -8,14 +15,15 @@ async function fetchBlogs() {
 
   return res.json();
 }
+
 export default async function BlogsPage() {
-  let blogs = [];
-  let fetchError = null;
+  let blogs: Blog[] = [];
+  let fetchError: string | null = null;
 
   try {
     blogs = await fetchBlogs();
   } catch (error) {
-    fetchError = error.message;
+    fetchError = (error as Error).message;
   }
 
   return (

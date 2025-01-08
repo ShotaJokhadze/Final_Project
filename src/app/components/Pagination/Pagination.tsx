@@ -1,11 +1,18 @@
 import Link from "next/link";
 
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
 export function Pagination({
   currentPage,
   totalPages,
   hasNextPage,
   hasPrevPage,
-}) {
+}: PaginationProps): JSX.Element {
   return (
     <div className="flex justify-center items-center space-x-4 mt-6">
       {hasPrevPage && (

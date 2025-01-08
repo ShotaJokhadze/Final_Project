@@ -1,9 +1,16 @@
-export default function Blog(props) {
+import React from 'react';
 
-  const { title_en, body_en, category_en, likes, dislikes, views } = props
+interface BlogProps {
+  title_en: string;
+  body_en: string;
+  category_en: string;
+  likes: number;
+  dislikes: number;
+  views: number;
+}
 
-  console.log(props)
-
+const Blog: React.FC<BlogProps> = (props) => {
+  const { title_en, body_en, category_en, likes, dislikes, views } = props;
 
   return (
     <div className="blog-card w-3/5 p-4 flex flex-col justify-center">
@@ -20,5 +27,7 @@ export default function Blog(props) {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Blog;

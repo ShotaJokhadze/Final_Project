@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Product from "../../../../components/Product/Product";
-
-const url = "https://dummyjson.com/products";
+import { Product as ProductInterface } from "../../../../../types/product";
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`);
@@ -9,14 +8,14 @@ export async function generateStaticParams() {
     throw new Error("Failed to fetch product");
   }
 
-  const data = await res.json();
+  const data: ProductInterface[] = await res.json();
 
   return data.map((product) => ({
     id: product.id.toString(),
   }));
 }
 
-async function getProduct(id) {
+async function getProduct(id: string): Promise<ProductInterface> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`
   );
@@ -25,11 +24,16 @@ async function getProduct(id) {
     throw new Error("Failed to fetch product");
   }
 
-  const data = await res.json();
-  return data;
+  return res.json();
 }
 
-export default async function ProductPage({ params }) {
+interface ProductPageProps {
+  params: {
+    id: string,
+  };
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
   const product = await getProduct(params.id);
 
   if (!product) {

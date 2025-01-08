@@ -10,12 +10,21 @@ import { notFound } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
+type Locale = "en" | "ka";  // Define the allowed locales as a union type
+
+interface LocaleLayoutProps {
+  children: React.ReactNode;
+  params: {
+    locale: Locale;  // Type locale as 'en' or 'ka'
+  };
+}
+
 export const metadata = {
   title: "Next App",
   description: "My App is on a Next.js",
 };
 
-export default async function LocaleLayout({ children, params }) {
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = params;
 
   if (!routing.locales.includes(locale)) {

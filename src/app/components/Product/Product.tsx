@@ -1,7 +1,8 @@
-export default function Product(props) {
+import { Product as ProductInterface } from "../../../types/product";
 
-  const { title, description, category, price, rating, images, brand } = props
+interface ProductProps extends ProductInterface { }
 
+const Product: React.FC<ProductProps> = ({ title, description, category, price, images }) => {
   const firstImage = images && images.length > 0 ? images[0] : null;
 
   return (
@@ -18,8 +19,12 @@ export default function Product(props) {
         <h2 className="product-title">{title}</h2>
         <div className="bg-yellow-100 w-fit p-2 rounded-lg text-black">{category}</div>
         <div className="product-description">{description}</div>
-        <div className="flex justify-between w-1/2"><p>Price</p>${price}</div>
+        <div className="flex justify-between w-1/2">
+          <p>Price</p>${price}
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Product;

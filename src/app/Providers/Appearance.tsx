@@ -1,8 +1,13 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
+import { ReactNode } from "react";
 
-export function Appearance({ children }) {
+interface AppearanceProps {
+  children: ReactNode;
+}
+
+export function Appearance({ children }: AppearanceProps): JSX.Element {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
