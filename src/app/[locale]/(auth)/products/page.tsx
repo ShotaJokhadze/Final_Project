@@ -1,7 +1,8 @@
 import Card from "../../../components/productCard/Card";
 import { Pagination } from "../../../components/Pagination/Pagination";
+import { Product } from "../../../../types/product";
 
-async function fetchProducts() {
+async function fetchProducts(): Promise<Product[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
     cache: "no-store",
   });
@@ -13,18 +14,24 @@ async function fetchProducts() {
   return res.json();
 }
 
-export default async function ProductsPage({ searchParams }) {
-  let products = [];
-  let fetchError = null;
+interface ProductsPageProps {
+  searchParams: {
+    page?: string;
+  };
+}
+
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  let products: Product[] = [];
+  let fetchError: string | null = null;
 
   try {
     products = await fetchProducts();
   } catch (err) {
-    fetchError = err.message;
+    fetchError = (err as Error).message;
   }
 
   // Pagination logic
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
   const productsPerPage = 18;
   const totalProducts = products.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);

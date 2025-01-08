@@ -4,17 +4,19 @@ import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
-export default function AppearanceSwitch() {
-  const [mounted, setMounted] = useState(false);
+export default function AppearanceSwitch(): JSX.Element {
+  const [mounted, setMounted] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
-  const handleSelectTheme = (selectedTheme) => {
+  const handleSelectTheme = (selectedTheme: string): void => {
     setTheme(selectedTheme);
     setDropdownOpen(false);
   };
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted)
     return (
@@ -31,7 +33,7 @@ export default function AppearanceSwitch() {
       onClick={() => setDropdownOpen(!dropdownOpen)}
     >
       <div className="bg-mediumGray text-light p-2 rounded-md min-w-32 text-center">
-        Theme: {theme[0].toUpperCase() + theme.substring(1)}
+        Theme: {theme && theme[0].toUpperCase() + theme.substring(1)}
       </div>
       {dropdownOpen && (
         <ul className="absolute top-full bg-mediumGray w-full text-light rounded-md">
@@ -39,22 +41,22 @@ export default function AppearanceSwitch() {
             onClick={() => handleSelectTheme("light")}
             className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
           >
-            <FiSun></FiSun>
+            <FiSun />
             <p>Light</p>
           </li>
           <li
             onClick={() => handleSelectTheme("dark")}
             className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
           >
-            <FiMoon></FiMoon>
+            <FiMoon />
             <p>Dark</p>
           </li>
           <li
             onClick={() => handleSelectTheme("system")}
             className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
           >
-            <FiMonitor></FiMonitor>
-            System
+            <FiMonitor />
+            <p>System</p>
           </li>
         </ul>
       )}

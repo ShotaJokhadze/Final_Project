@@ -1,24 +1,25 @@
-'use client'
+"use client"
 
 import AppearanceSwitch from '../AppearanceSwitch/AppearanceSwitch';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import { Link } from '../../../i18n/routing'
+import { Link } from '../../../i18n/routing';
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from 'react';
 
+interface HeaderProps {}
 
-export default function Header() {
-  const t = useTranslations("Header")
+export default function Header({}: HeaderProps): JSX.Element {
+  const t = useTranslations("Header");
 
   const router = useRouter();
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState()
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const changeLanguage = (locale) => {
+  const changeLanguage = (locale: string): void => {
     setIsOpen(false);
     router.push(`/${locale}${pathname.slice(3)}`);
-  }
+  };
 
   const { user } = useUser();
 
@@ -61,7 +62,7 @@ export default function Header() {
         <div className="flex items-center gap-1">
           {user ? <div className='flex items-center gap-2'>
             <Link href="/profile">
-              <img className='w-10 rounded-full' src={user.picture} alt="" />
+              <img className='w-10 rounded-full' src={user.picture || ''} alt="User" />
             </Link>
             <a
               className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center'
