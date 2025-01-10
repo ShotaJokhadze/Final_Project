@@ -27,8 +27,15 @@
     "next-env.d.ts",
     "./dist/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/app/[locale]/(auth)/profile/page.tsx", "src/i18n/request.js", "src/middleware.js", "src/i18n/routing.js", "eslint.config.js", "src/app/api/products/[id]/route.ts"  ],
+    "**/*.tsx",
+    "src/app/[locale]/(auth)/profile/page.tsx",
+    "src/i18n/request.ts",
+    "src/middleware.ts",
+    "src/i18n/routing.ts",
+    "eslint.config.js",
+    "src/app/api/products/[id]/route.ts",
+    ".next/types/**/*.ts"
+, "postcss.config.js", "tailwind.config.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -3,15 +3,18 @@
 import AppearanceSwitch from '../AppearanceSwitch/AppearanceSwitch';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Link } from '../../../i18n/routing';
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface HeaderProps {}
 
 export default function Header({}: HeaderProps): JSX.Element {
   const t = useTranslations("Header");
 
+  const locale = useLocale();
+
+  const [session, setSession] = useState<boolean | null>(null); 
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,7 +24,40 @@ export default function Header({}: HeaderProps): JSX.Element {
     router.push(`/${locale}${pathname.slice(3)}`);
   };
 
-  const { user } = useUser();
+  const loginHref = pathname.includes("/ka") ? "/ka/login" : "/en/login";
+  const logoutHref = pathname.includes("/ka") ? "/ka/logout" : "/en/logout";
+
+  useEffect(() => {
+  
+    const checkAuthStatus = async () => {
+      const response = await fetch(`/${locale}/api/auth/status`);
+      const data = await response.json();
+
+      if (data.authenticated) {
+        setSession(true);
+      } else {
+        setSession(false);
+      }
+    };
+
+    checkAuthStatus();
+  }, []);
+
+  const handleLogout = async () => {
+    const response = await fetch(`/${locale}/api/auth/logout`, {
+      method: "POST",
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log('Logout failed. Error message:', data.message);
+    } else {
+      console.log('Logout successful:', data.message);
+      // Redirect to the login page
+      window.location.href = `/${locale}/login`; 
+    }
+  };
 
   return (
     <nav id='topnav' className='bg-darkGray w-full z-50 relative text-light dark:bg-light dark:text-darkGray py-1'>
@@ -60,20 +96,28 @@ export default function Header({}: HeaderProps): JSX.Element {
           </ul>
         </div>
         <div className="flex items-center gap-1">
-          {user ? <div className='flex items-center gap-2'>
-            <Link href="/profile">
-              <img className='w-10 rounded-full' src={user.picture || ''} alt="User" />
-            </Link>
-            <a
-              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center'
-              href='/api/auth/logout'>{t("logout")}
+        {session === null ? (
+          <div>Loading...</div> 
+        ) : !session ? (
+          
+            <a className="flex items-center" href={`/${locale}/login`}>
+              <span className="bg-mediumGray text-light p-2 rounded-md min-w-20 text-center"> Log in</span>
             </a>
-          </div>
+          
+        ) : (
+          
+            <a className="flex items-center">
+              <button
+                onClick={handleLogout}
+                className="bg-mediumGray text-light p-2 rounded-md min-w-20 text-center"
+              >
+                {" "}
+                Log out
+              </button>
+            </a>
+          
+        )}
 
-            : <a href="/api/auth/login"
-              className='bg-mediumGray text-light p-2 rounded-md min-w-20 text-center'>
-              {t("login")}
-            </a>}
 
           <AppearanceSwitch />
           <div className="p-2 flex items-center relative cursor-pointer"

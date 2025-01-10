@@ -7,7 +7,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "../../i18n/routing";
 import { notFound } from "next/navigation";
-import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
 
 type Locale = "en" | "ka";  // Define the allowed locales as a union type
@@ -32,22 +31,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   const messages = await getMessages();
-
-  const session = await getSession();
-
-  if (!session?.user) {
-    redirect("/api/auth/login");
-  }
-
-  if (session?.error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="p-4 bg-red-100 text-red-700 rounded-lg">
-          {session.error.message}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <html lang={locale} suppressHydrationWarning>
