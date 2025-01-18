@@ -8,7 +8,29 @@
     "contact": "Contact us",
     "blog": "Blog",
     "profile": "Profile",
-    "logout": "Logout",
-    "login": "Login"
+    "logout": "Sign out",
+    "login": "Log in"
+  },
+  "Login": {
+    "title": "Log in",
+    "Email": "Email Address",
+    "Password": "Password",
+    "NotRegistered": "Don’t have an account?",
+    "Signup": "Sign Up",
+    "Github": "Sign in with Github"
+  },
+  "Signup": {
+    "title": "Sign up",
+    "Email": "Email Address",
+    "Password": "Password",
+    "Registered": "Already have an account?",
+    "Login": "Log In"
+  },
+  "Theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "theme": "Theme",
+    "selectMode": "Select Mode"
   }
 }

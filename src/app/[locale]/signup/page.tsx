@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Signup() {
   const locale = useLocale();
+  const t = useTranslations('Signup');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +45,7 @@ export default function Signup() {
     <div className="flex flex-grow items-center justify-center">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-xl rounded-xl p-6 space-y-6">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-          Sign Up
+        {t("title")}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,7 +55,7 @@ export default function Signup() {
               htmlFor="email"
               className="font-medium text-gray-800 dark:text-gray-300"
             >
-              Email Address
+              {t("Email")}
             </label>
             <input
               id="email"
@@ -72,7 +73,7 @@ export default function Signup() {
               htmlFor="password"
               className="font-medium text-gray-800 dark:text-gray-300"
             >
-              Password
+              {t("Password")}
             </label>
             <input
               id="password"
@@ -85,13 +86,13 @@ export default function Signup() {
           </div>
 
           <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-            Already have an account?{" "}
+          {t("Registered")}{" "}
             <a
               data-cy="sign-up-link"
               href="./login"
               className="text-blue-600 dark:text-blue-400 font-medium hover:underline focus:outline-none"
             >
-              Log in
+              {t("Login")}
             </a>
           </div>
 
@@ -100,7 +101,7 @@ export default function Signup() {
             className="w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none dark:bg-blue-700 dark:hover:bg-blue-800"
             type="submit"
           >
-            Sign Up
+            {t("title")}
           </button>
 
           {/* Error or Success Message */}

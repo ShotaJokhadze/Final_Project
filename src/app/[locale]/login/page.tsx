@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { FaGithub } from "react-icons/fa";
 import { supabase } from "../supabase/supabase";
 
 export default function Login() {
   const locale = useLocale();
+  const t = useTranslations('Login');
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,7 +61,7 @@ export default function Login() {
     <div className="flex flex-grow items-center justify-center h-ful">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-sm m-4 rounded-xl p-6 space-y-6">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-          Log In
+        {t("title")}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -68,7 +71,7 @@ export default function Login() {
               htmlFor="email"
               className="font-medium text-gray-800 dark:text-gray-300"
             >
-              Email Address
+              {t("Email")}
             </label>
             <input
               data-cy="login-email-input"
@@ -86,7 +89,7 @@ export default function Login() {
               htmlFor="password"
               className="font-medium text-gray-800 dark:text-gray-300"
             >
-              Password
+              {t("Password")}
             </label>
             <input
               data-cy="login-password-input"
@@ -99,14 +102,14 @@ export default function Login() {
           </div>
 
           {/* Sign Up Link */}
-          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-            Don’t have an account?{" "}
+          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400 flex justify-center gap-3">
+          {t("NotRegistered")}{" "}
             <a
               data-cy="sign-up-link"
               href="./signup"
               className="text-blue-600 dark:text-blue-400 font-medium hover:underline focus:outline-none"
             >
-              Sign Up
+              {t("Signup")}
             </a>
           </div>
 
@@ -114,9 +117,10 @@ export default function Login() {
           <button
             onClick={handleGithubLogin}
             type="button"
-            className="w-full py-3 px-4 bg-darkGray text-white rounded-md mt-4"
+            className="w-full py-3 px-4 bg-darkGray text-white rounded-md mt-4 flex justify-center items-center gap-3"
           >
-            Sign in with GitHub
+            {t("Github")}
+            <FaGithub className="text-xl"/>
           </button>
 
           {/* Submit Button */}
@@ -125,7 +129,7 @@ export default function Login() {
             className="w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none dark:bg-blue-700 dark:hover:bg-blue-800"
             type="submit"
           >
-            Log In
+            {t("title")}
           </button>
 
           {/* Error or Success Message */}

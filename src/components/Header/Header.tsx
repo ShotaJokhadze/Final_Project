@@ -9,6 +9,9 @@ import GeoFlag from '../../assets/georgia.png';
 import USFlag from '../../assets/united-states.png';
 import { Menu, X } from 'lucide-react';
 import Loader from "../Loader/Loader";
+import { FiLogOut, FiLogIn } from "react-icons/fi";
+import { FaUser } from "react-icons/fa";
+
 
 interface HeaderProps {}
 
@@ -56,12 +59,12 @@ export default function Header({}: HeaderProps): JSX.Element {
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
     { href: "/blogs", label: t("blog") },
-    { href: "/profile", label: t("profile") }
+    // { href: "/profile", label: t("profile") }
   ];
 
   return (
     <nav id='topnav' className='bg-darkGray w-full sticky top-0 z-50 text-light dark:bg-light dark:text-darkGray py-1'>
-      <div className="navbar-container relative flex w-4/5 max-w-screen-xl justify-between mx-auto items-center">
+      <div className="navbar-container relative flex w-[90%] sm:w-4/5 max-w-screen-xl justify-between mx-auto items-center">
         <div className="logo p-3">
           <Link className='w-full h-full block text-3xl' href="/">Home</Link>
         </div>
@@ -83,23 +86,36 @@ export default function Header({}: HeaderProps): JSX.Element {
         </div>
 
         {/* Right side items */}
+        
+
         <div className="flex items-center gap-3">
+          <div>
+            <Link href='/profile'><FaUser className="text-3xl"/></Link>
+          </div>
           {session === null ? (
-            <div><Loader /></div>
-          ) : !session ? (
-            <a className="flex items-center" href={`/${locale}/login`}>
-              <span className="bg-mediumGray text-light p-2 rounded-md min-w-20 text-center">Log in</span>
-            </a>
-          ) : (
-            <a className="flex items-center">
-              <button
-                onClick={handleLogout}
-                className="bg-mediumGray text-light p-2 rounded-md min-w-20 text-center"
-              >
-                Log out
-              </button>
-            </a>
-          )}
+              <div>
+                <Loader />
+              </div>
+            ) : !session ? (
+                <a className="flex items-center" href={`/${locale}/login`}>
+                  <span className="bg-mediumGray text-light p-2 rounded-md  text-center flex items-center justify-center gap-1">
+                    <span className="hidden lg:inline">{t("login")}</span>
+                    <FiLogIn />
+                  </span>
+                </a>
+              ) : (
+                <a className="flex items-center">
+                  <button
+                    onClick={handleLogout}
+                    className="bg-mediumGray text-light p-2 rounded-md text-center flex items-center justify-center gap-1"
+                  >
+                    <span className="hidden lg:inline">{t("logout")}</span>
+                    <FiLogOut />
+                  </button>
+                </a>
+              )
+          }
+
 
           <AppearanceSwitch />
 
