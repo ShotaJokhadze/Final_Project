@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import { Link } from "../../i18n/routing";
+
 
 export default function Footer() {
   return (
@@ -21,12 +22,7 @@ export default function Footer() {
                 <Link
                   className='block font-medium leading-6 transition-all hover:text-red underline'
                   href="/contact">Contact Us</Link>
-              </li>
-              <li>
-                <Link
-                  className='block font-medium leading-6 transition-all hover:text-red underline'
-                  href="/assignment3">Assignment 3</Link>
-              </li>
+              </li>              
               <li>
                 <Link
                   className='block font-medium leading-6 transition-all hover:text-red underline'

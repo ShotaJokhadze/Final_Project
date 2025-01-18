@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Product from "../../../../components/Product/Product";
+import Product from "../../../../../components/Product/Product";
 import { Product as ProductInterface } from "../../../../../types/product";
 
 export async function generateStaticParams() {

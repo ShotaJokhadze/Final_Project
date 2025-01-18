@@ -1,4 +1,5 @@
-import { createClient } from "../../../utils/supabase/server";
+import { createClient } from "../../../../utils/supabase/server";
+
 
 export default async function ProfileClient() {
   const supabase = await createClient();
@@ -49,10 +50,6 @@ export default async function ProfileClient() {
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 <strong>Username:</strong>{" "}
                 {user.user_metadata?.user_name || "Not provided"}
-              </p>
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                <strong>Location:</strong>{" "}
-                {user.user_metadata?.location || "Not provided"}
               </p>
             </div>
 

@@ -1,4 +1,4 @@
-import { PostsButton } from "../../../components/Button/Buttons";
+import { PostsButton } from "../../../../components/Button/Buttons";
 
 interface Blog {
   id: number;
@@ -32,7 +32,7 @@ export default async function BlogsPage() {
         <h2 className="text-center text-2xl">Our Blogs</h2>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center place-content-center">
         {fetchError && <p>{fetchError}</p>}
 
         {blogs &&

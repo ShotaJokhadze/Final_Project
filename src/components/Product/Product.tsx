@@ -1,4 +1,4 @@
-import { Product as ProductInterface } from "../../../types/product";
+import { Product as ProductInterface } from "../../types/product";
 
 interface ProductProps extends ProductInterface { }
 

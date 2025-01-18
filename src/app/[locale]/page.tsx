@@ -1,10 +1,14 @@
+'use client'
 import { useTranslations } from "next-intl";
-export default function HomePage() {
-  const t = useTranslations();
+
+const HomePage = () => {
+  const t = useTranslations('HomePage'); // Get translations
 
   return (
-    <div className="home flex items-center">
-      <h1>{t("HomePage.title")}</h1>
+    <div>
+      <h1>{t("title")}</h1>
     </div>
   );
-}
+};
+
+export default HomePage;

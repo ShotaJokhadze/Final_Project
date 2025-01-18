@@ -20,29 +20,25 @@ export async function POST(req: NextRequest) {
     cookies: () => cookieStore,
   });
 
-const {error }= await supabase.auth.signUp({
-  email,
-  password,
-
-});
-
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
 
   const locale = cookies().get("locale")?.value || "en";
 
   if (error) {
-   
-    console.error("Login error:", error.message);
+    console.error("Sign-up error:", error.message);
 
-    
     return NextResponse.json(
-      { error: error.message }, 
-      { status: 400 } 
+      { error: error.message },
+      { status: 400 }
     );
   }
 
-  
-  return redirect({
-    href: "/", 
-    locale, 
-  });
+  // Success response with message
+  return NextResponse.json(
+    { success: "Thanks for signing up! Please check your email for a verification link." },
+    { status: 200 }
+  );
 }

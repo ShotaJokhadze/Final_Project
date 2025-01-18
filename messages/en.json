@@ -1,6 +1,6 @@
 {
-  "HomePage" : {
-    "title" : "This is home page"
+  "HomePage": {
+    "title": "This is home page"
   },
   "Header": {
     "about": "About",
@@ -8,7 +8,7 @@
     "contact": "Contact us",
     "blog": "Blog",
     "profile": "Profile",
-    "logout" : "Logout",
-    "login" : "Login"
+    "logout": "Logout",
+    "login": "Login"
   }
 }

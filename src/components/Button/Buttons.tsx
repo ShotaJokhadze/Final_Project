@@ -1,6 +1,7 @@
 "use client"
 
-import { useRouter } from "../../../i18n/routing";
+import { useRouter } from "../../i18n/routing";
+
 
 interface NavButtonProps {
   id: string | number;

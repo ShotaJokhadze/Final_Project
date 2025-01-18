@@ -1,5 +1,5 @@
-import Card from "../../../components/productCard/Card";
-import { Pagination } from "../../../components/Pagination/Pagination";
+import Card from "../../../../components/productCard/Card";
+import { Pagination } from "../../../../components/Pagination/Pagination";
 import { Product } from "../../../../types/product";
 
 async function fetchProducts(): Promise<Product[]> {
@@ -46,7 +46,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     <div className="products-page p-3 w-full">
       {fetchError && <p>{fetchError}</p>}
 
-      <div className="card-container grid grid-cols-3 gap-5 place-items-center place-content-center">
+      <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center place-content-center">
         {paginatedProducts.map((product) => (
           <div
             className="card border border-mediumGray rounded-lg overflow-hidden relative h-[390px] flex flex-col justify-around gap-2 max-w-80"

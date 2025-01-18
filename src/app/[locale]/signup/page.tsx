@@ -2,30 +2,41 @@
 import React, { useState } from "react";
 import { useLocale } from "next-intl";
 
-export default function signup() {
+export default function Signup() {
   const locale = useLocale();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+      const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
 
-    const response = await fetch(`/${locale}/api/auth/signup`, {
-      method: "POST",
-      body: new URLSearchParams({
-        email,
-        password,
-      }),
-    });
+      const response = await fetch(`/${locale}/api/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          email,
+          password,
+        }),
+      });
 
-    if (!response.ok) {
       const result = await response.json();
-      setErrorMessage(result.error);
-    } else {
-      window.location.href = `/${locale}`;
+
+      if (!response.ok) {
+        setErrorMessage(result.error || "An unknown error occurred.");
+      } else {
+        setErrorMessage(result.success || "An unknown error occurred.");
+        setTimeout(() => {
+          window.location.href = `/${locale}`;
+        }, 2000);
+      }
+    } catch (error: any) {
+      setErrorMessage(error.message || "An error occurred. Please try again.");
     }
   };
 
@@ -33,10 +44,11 @@ export default function signup() {
     <div className="flex flex-grow items-center justify-center">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-xl rounded-xl p-6 space-y-6">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-          Sign up
+          Sign Up
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Email Input */}
           <div className="flex flex-col space-y-3">
             <label
               htmlFor="email"
@@ -45,6 +57,7 @@ export default function signup() {
               Email Address
             </label>
             <input
+              id="email"
               type="email"
               name="email"
               placeholder="Enter your email"
@@ -53,14 +66,16 @@ export default function signup() {
             />
           </div>
 
-          <div className="flex flex-col space-y-3 mb-6">
+          {/* Password Input */}
+          <div className="flex flex-col space-y-3">
             <label
               htmlFor="password"
-              className=" font-medium text-gray-800 dark:text-gray-300"
+              className="font-medium text-gray-800 dark:text-gray-300"
             >
               Password
             </label>
             <input
+              id="password"
               type="password"
               name="password"
               placeholder="Enter your password"
@@ -69,13 +84,26 @@ export default function signup() {
             />
           </div>
 
+          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+            Already have an account?{" "}
+            <a
+              data-cy="sign-up-link"
+              href="./login"
+              className="text-blue-600 dark:text-blue-400 font-medium hover:underline focus:outline-none"
+            >
+              Log in
+            </a>
+          </div>
+
+          {/* Submit Button */}
           <button
-            className="w-full py-3 bg-customPurple mt-6  text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none dark:bg-blue-700 dark:hover:bg-blue-800"
+            className="w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none dark:bg-blue-700 dark:hover:bg-blue-800"
             type="submit"
           >
             Sign Up
           </button>
 
+          {/* Error or Success Message */}
           {errorMessage && (
             <div className="text-center text-red-500 mt-4">
               <strong>{errorMessage}</strong>

@@ -1,4 +1,4 @@
-import { createClient } from "../../../../utils/supabase/server";
+import { createClient } from "../../../../../utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { defineRouting } from "next-intl/routing";

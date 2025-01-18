@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { createClient } from "./app/utils/supabase/server"; // Your custom createClient function
+import { createClient } from "./utils/supabase/server"; // Your custom createClient function
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
