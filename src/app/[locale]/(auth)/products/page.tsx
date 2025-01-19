@@ -57,7 +57,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
       <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center place-content-center mt-2">
         {paginatedProducts.map((product) => (
           <div
-            className="card w-[300px] border border-mediumGray rounded-lg overflow-hidden relative h-[390px] flex flex-col justify-around gap-2 max-w-80"
+            className="card w-[300px] border border-mediumGray relative h-[390px] flex flex-col justify-around gap-2 max-w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors duration-300 overflow-hidden"
             key={product.id}
           >
             <Card
