@@ -272,7 +272,7 @@ export default function CreateProduct() {
 
       {/* Success Message */}
       {successMessage && (
-        <div className="mt-4 p-4 bg-green-200 text-green-800 rounded-md">
+        <div className="mt-4 p-4 text-green-800 rounded-md">
           {successMessage}
         </div>
       )}
