@@ -58,7 +58,7 @@ export default function AppearanceSwitch(): JSX.Element {
       onBlur={() => setDropdownOpen(false)}
       onClick={() => setDropdownOpen(!dropdownOpen)}
     >
-      <div className="bg-mediumGray text-light p-2 rounded-md text-center flex items-center gap-2">
+      <div className="bg-mediumGray text-light p-2 rounded-md text-center flex items-center justify-center gap-2 min-h-[40px] min-w-[40px]">
         <span className="hidden lg:inline">{t("theme")}:</span>
         {themeIcon()}
       </div>

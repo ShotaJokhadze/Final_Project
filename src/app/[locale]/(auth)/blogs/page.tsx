@@ -2,12 +2,16 @@ import { PostsButton } from "../../../../components/Button/Buttons";
 
 interface Blog {
   id: number;
-  title_en: string;
-  body_en: string;
+  title: string;
+  description: string;
+  title_ge: string;
+  description_ge: string;
 }
 
 async function fetchBlogs(): Promise<Blog[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`, {
+    cache: 'no-store'
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch blogs");
@@ -28,7 +32,7 @@ export default async function BlogsPage() {
 
   return (
     <div className="h-full my-5">
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex justify-center items-center mb-5">
         <h2 className="text-center text-2xl">Our Blogs</h2>
       </div>
 
@@ -42,9 +46,9 @@ export default async function BlogsPage() {
               className="flex flex-col overflow-hidden border border-solid border-white bg-darkGray hover:scale-105 cursor-pointer"
             >
               <div className="p-2 flex flex-col justify-between flex-1">
-                <h2 className="text-lg m-0 text-white">{post.title_en}</h2>
+                <h2 className="text-lg m-0 text-white">{post.title}</h2>
                 <p className="text-[0.9rem] text-gray-300 my-1 line-clamp-5">
-                  {post.body_en}
+                  {post.description}
                 </p>
                 <div className="flex justify-between">
                   <PostsButton id={post.id} />

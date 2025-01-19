@@ -90,15 +90,15 @@ export default function Header({}: HeaderProps): JSX.Element {
 
         <div className="flex items-center gap-3">
           <div>
-            <Link href='/profile'><FaUser className="text-3xl"/></Link>
+            <Link href='/profile'><FaUser className="text-[35px]"/></Link>
           </div>
           {session === null ? (
               <div>
                 <Loader />
               </div>
             ) : !session ? (
-                <a className="flex items-center" href={`/${locale}/login`}>
-                  <span className="bg-mediumGray text-light p-2 rounded-md  text-center flex items-center justify-center gap-1">
+                <a className="flex items-center " href={`/${locale}/login`}>
+                  <span className="bg-mediumGray text-light p-2 rounded-md  text-center flex items-center justify-center gap-1 min-h-[40px] min-w-[40px]">
                     <span className="hidden lg:inline">{t("login")}</span>
                     <FiLogIn />
                   </span>
@@ -107,7 +107,7 @@ export default function Header({}: HeaderProps): JSX.Element {
                 <a className="flex items-center">
                   <button
                     onClick={handleLogout}
-                    className="bg-mediumGray text-light p-2 rounded-md text-center flex items-center justify-center gap-1"
+                    className="bg-mediumGray text-light p-2 rounded-md text-center flex items-center justify-center gap-1 min-h-[40px] min-w-[40px]"
                   >
                     <span className="hidden lg:inline">{t("logout")}</span>
                     <FiLogOut />

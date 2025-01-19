@@ -2,12 +2,10 @@ import Blog from "../../../../../components/Blog/Blog";
 
 interface BlogPost {
   id: number;
-  title_en: string;
-  body_en: string;
-  category_en: string;
-  likes: number;
-  dislikes: number;
-  views: number;
+  title: string;
+  description: string;
+  title_ge: string;
+  description_ge: string;
 }
 
 export async function generateStaticParams() {

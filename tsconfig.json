@@ -35,7 +35,7 @@
     "eslint.config.js",
     "src/app/api/products/[id]/route.ts",
     ".next/types/**/*.ts"
-, "postcss.config.js", "tailwind.config.js"  ],
+, "postcss.config.js", "tailwind.config.js", "next.config.mjs"  ],
   "exclude": [
     "node_modules"
   ]

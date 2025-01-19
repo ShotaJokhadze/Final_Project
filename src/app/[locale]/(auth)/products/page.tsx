@@ -1,6 +1,7 @@
 import Card from "../../../../components/productCard/Card";
 import { Pagination } from "../../../../components/Pagination/Pagination";
 import { Product } from "../../../../types/product";
+import Link from "next/link";
 
 async function fetchProducts(): Promise<Product[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
@@ -15,12 +16,16 @@ async function fetchProducts(): Promise<Product[]> {
 }
 
 interface ProductsPageProps {
+  params: {
+    locale: string;
+  };
   searchParams: {
     page?: string;
   };
 }
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
+  const { locale } = params;
   let products: Product[] = [];
   let fetchError: string | null = null;
 
@@ -43,21 +48,25 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   );
 
   return (
-    <div className="products-page p-3 w-full">
+    <div className="products-page p-3 w-full h-full flex flex-col items-start">
       {fetchError && <p>{fetchError}</p>}
-
-      <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center place-content-center">
+      <div className="products-top flex justify-between items-center w-full">
+      <h1>Our Products</h1>
+      <Link className="bg-mediumGray text-light rounded-md p-3 hover:bg-gray-900 transition-all " href={`/${locale}/create-product`}>Create Product</Link>
+      </div>
+      <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center place-content-center mt-2">
         {paginatedProducts.map((product) => (
           <div
-            className="card border border-mediumGray rounded-lg overflow-hidden relative h-[390px] flex flex-col justify-around gap-2 max-w-80"
+            className="card min-w-[250px] border border-mediumGray rounded-lg overflow-hidden relative h-[390px] flex flex-col justify-around gap-2 max-w-80"
             key={product.id}
           >
             <Card
               key={product.id}
               id={product.id}
-              header={product.title}
-              content={product.description}
+              header={locale === 'ka' ? product.title_ge : product.title}
+              content={locale === 'ka' ? product.description_ge : product.description}
               price={product.price}
+              image={product.image}
             />
           </div>
         ))}
