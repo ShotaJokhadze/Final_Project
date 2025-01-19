@@ -20,7 +20,7 @@ export default function Header(): JSX.Element {
     { href: "/products", label: t("products") },
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
-    { href: "/blogs", label: t("blog") },
+    { href: "/blogs", label: t("blogs") },
   ];
 
   useEffect(() => {
