@@ -37,4 +37,37 @@ button {
   transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
 }
 
+.phone-input-container input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: black;
+  outline: none;
+}
 
+.phone-input-container input:focus {
+  ring: 2px;
+  ring-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.dark .phone-input-container input {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: white;
+}
+
+.phone-input-container select {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.dark .phone-input-container select {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: white;
+}

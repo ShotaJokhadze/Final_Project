@@ -26,7 +26,7 @@ export default async function ProfileClient() {
             {/* User details */}
             <div>
               <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
-                {user?.user_metadata?.full_name || "User"}
+                {user?.user_metadata?.full_name || user?.user_metadata?.first_name}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {user.email}

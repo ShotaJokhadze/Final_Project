@@ -10,7 +10,7 @@ export async function createBlog(inputData: FormData) {
 
   const title = inputData.get('title') as string;
   const description = inputData.get('description') as string;
-  const title_ge = inputData.get('title_ge') as string;  // Fixed typo in 'title_ge'
+  const title_ge = inputData.get('title_ge') as string;
   const description_ge = inputData.get('description_ge') as string;
   
   if (!title || !description) {
@@ -42,20 +42,13 @@ export async function createBlog(inputData: FormData) {
 export async function editBlog(blogId: string, inputData: FormData) {
   const supabase = await createClient();
 
-  // Verify user authorization
   const userResponse = await supabase.auth.getUser();
   const user_id = userResponse.data?.user?.id;
 
-  console.log('Authenticated user ID:', user_id);
-
-  // Get form data
   const title = inputData.get('title')?.toString();
   const description = inputData.get('description')?.toString();
   const title_ge = inputData.get('title_ge')?.toString() || null;
   const description_ge = inputData.get('description_ge')?.toString() || null;
-
-  console.log('Blog ID:', blogId);
-  console.log('Input Data:', { title, description, title_ge, description_ge });
 
   if (!title || !description) {
     console.log('Missing required fields');
@@ -85,7 +78,6 @@ export async function editBlog(blogId: string, inputData: FormData) {
       return { success: false, message: 'Unauthorized to edit this blog.' };
     }
 
-    // Prepare update data
     const updateData = {
       title,
       description,
@@ -93,14 +85,11 @@ export async function editBlog(blogId: string, inputData: FormData) {
       description_ge,
     };
 
-    console.log('Data to be updated:', updateData);
-
-    // Update the blog
     const { data, error } = await supabase
       .from('blogs')
       .update(updateData)
       .eq('id', blogId)
-      .select(); // Select the updated rows to confirm
+      .select();
 
     if (error) {
       console.error('Error updating Supabase:', error);
@@ -136,16 +125,7 @@ export async function getBlog(blogId: string) {
       return { success: false, message: 'Failed to fetch blog.', data: null };
     }
 
-    // Ensure all fields are strings before returning
-    const sanitizedData = {
-      ...data,
-      title: data.title || '',
-      description: data.description || '',
-      title_ge: data.title_ge || '',
-      description_ge: data.description_ge || ''
-    };
-
-    return { success: true, message: 'Blog fetched successfully.', data: sanitizedData };
+    return { success: true, message: 'Blog fetched successfully.', data: data };
   } catch(error) {
     console.error('Error:', error);
     return { success: false, message: 'Error fetching blog.', data: null };

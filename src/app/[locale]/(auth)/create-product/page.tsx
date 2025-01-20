@@ -35,7 +35,7 @@ export default function CreateProduct() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [successMessage, setSuccessMessage] = useState<string>('');
   
-  const router = useRouter(); // initialize useRouter for redirection
+  const router = useRouter();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

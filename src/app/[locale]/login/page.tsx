@@ -136,7 +136,7 @@ export default function Login() {
           {errorMessage && (
             <div
               data-cy="login-error-message"
-              className="text-center text-red-500 mt-4"
+              className="text-center text-red mt-4"
             >
               <strong>{errorMessage}</strong>
             </div>

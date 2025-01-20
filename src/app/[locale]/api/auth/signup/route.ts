@@ -16,6 +16,8 @@ export async function POST(req: NextRequest) {
   const formData = await req.formData();
   const email = String(formData.get("email"));
   const password = String(formData.get("password"));
+  const name = String(formData.get("name"));
+  const phone = String(formData.get("phone"))
   const supabase = createRouteHandlerClient({
     cookies: () => cookieStore,
   });
@@ -23,6 +25,12 @@ export async function POST(req: NextRequest) {
   const { error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: {
+        first_name: name,
+        phone: phone,
+      },
+    },
   });
 
   const locale = cookies().get("locale")?.value || "en";
