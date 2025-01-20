@@ -1,12 +1,6 @@
 import Blog from "../../../../../components/Blog/Blog";
+import { BlogType } from "../../../../../types/blogs";
 
-interface BlogPost {
-  id: number;
-  title: string;
-  description: string;
-  title_ge: string;
-  description_ge: string;
-}
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`);
@@ -15,14 +9,14 @@ export async function generateStaticParams() {
     throw new Error("Failed to fetch blog posts");
   }
 
-  const data: BlogPost[] = await res.json();
+  const data: BlogType[] = await res.json();
 
   return data.map((post) => ({
     id: post.id.toString(),
   }));
 }
 
-async function getBlogPost(id: string): Promise<BlogPost> {
+async function getBlogPost(id: string): Promise<BlogType> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs/${id}`);
 
   if (!res.ok) {

@@ -47,14 +47,27 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
     page * productsPerPage
   );
 
+  // Helper function to get the appropriate text based on locale and availability
+  const getLocalizedText = (georgianText: string | null, englishText: string) => {
+    if (locale === 'ka') {
+      return georgianText || englishText; // Fallback to English if Georgian is null
+    }
+    return englishText;
+  };
+
   return (
     <div className="products-page p-3 w-full h-full flex flex-col items-between">
       {fetchError && <p>{fetchError}</p>}
       <div className="products-top flex justify-between items-center w-full">
-      <h1>Our Products</h1>
-      <Link className="bg-mediumGray text-light rounded-md p-3 hover:bg-gray-900 transition-all " href={`/${locale}/create-product`}>Create Product</Link>
+        <h1>Our Products</h1>
+        <Link 
+          className="bg-mediumGray text-light rounded-md p-3 hover:bg-gray-900 transition-all" 
+          href={`/${locale}/create-product`}
+        >
+          Create Product
+        </Link>
       </div>
-      <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center place-content-center mt-2">
+      <div className="card-container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center place-content-center mt-2">
         {paginatedProducts.map((product) => (
           <div
             className="card w-[300px] border border-mediumGray relative h-[390px] flex flex-col justify-around gap-2 max-w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors duration-300 overflow-hidden"
@@ -63,8 +76,8 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
             <Card
               key={product.id}
               id={product.id}
-              header={locale === 'ka' ? product.title_ge : product.title}
-              content={locale === 'ka' ? product.description_ge : product.description}
+              header={getLocalizedText(product.title_ge, product.title)}
+              content={getLocalizedText(product.description_ge, product.description)}
               price={product.price}
               image={product.image}
             />
