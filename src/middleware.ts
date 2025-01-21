@@ -21,6 +21,7 @@ export async function middleware(req: NextRequest) {
   const session = data?.session;
   
   const isLoginPage = req.nextUrl.pathname.includes("/login");
+  const isSignupPage = req.nextUrl.pathname.includes("/signup");
   const isRestrictedPage = [
     "/contact",
     "/profile",
@@ -30,6 +31,13 @@ export async function middleware(req: NextRequest) {
     '/create-product',
     '/create-blog'
   ].some((path) => req.nextUrl.pathname.includes(path));
+
+  // Redirect logged-in users away from login or signup pages
+  if (session && (isLoginPage || isSignupPage)) {
+    const locale = req.nextUrl.pathname.startsWith("/ka") ? "ka" : "en";
+    const redirectUrl = new URL(`/${locale}/`, req.url); // Redirect to homepage or dashboard
+    return NextResponse.redirect(redirectUrl);
+  }
 
   // If no session and the user is trying to access a restricted page, redirect to login
   if (!session && !isLoginPage && isRestrictedPage) {
