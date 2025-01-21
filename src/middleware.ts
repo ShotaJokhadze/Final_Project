@@ -27,6 +27,8 @@ export async function middleware(req: NextRequest) {
     "/blogs",
     "/about",
     "/products",
+    '/create-product',
+    '/create-blog'
   ].some((path) => req.nextUrl.pathname.includes(path));
 
   // If no session and the user is trying to access a restricted page, redirect to login

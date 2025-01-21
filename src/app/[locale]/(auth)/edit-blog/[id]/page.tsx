@@ -259,14 +259,14 @@ export default function EditBlog({ params }: EditBlogProps) {
 
       {/* Success Message */}
       {successMessage && (
-        <div className="mt-4 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-md">
+        <div className="mt-4 p-4 text-green-800 rounded-md">
           {successMessage}
         </div>
       )}
 
       {/* Error Message */}
       {errors.submit && (
-        <div className="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100 rounded-md">
+        <div className="mt-4 p-4 text-red rounded-md">
           {errors.submit}
         </div>
       )}

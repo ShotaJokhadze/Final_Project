@@ -100,7 +100,7 @@ export default function Signup() {
               htmlFor="displayName"
               className="font-medium text-gray-800 dark:text-gray-300"
             >
-              Name
+              Full Name
             </label>
             <input
               type="text"
