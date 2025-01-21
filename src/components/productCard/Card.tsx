@@ -1,5 +1,4 @@
 import { ProductButton } from '../Button/Buttons';
-import Image from 'next/image';
 import { FC } from 'react';
 
 interface CardProps {

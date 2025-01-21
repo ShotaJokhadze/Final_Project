@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from "./supabase/server"
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function createBlog(inputData: FormData) {
   const supabase = await createClient()
@@ -129,5 +130,46 @@ export async function getBlog(blogId: string) {
   } catch(error) {
     console.error('Error:', error);
     return { success: false, message: 'Error fetching blog.', data: null };
+  }
+}
+
+export async function deleteBlog(blogId: number) {
+  const supabase = await createClient();
+
+  const userResponse = await supabase.auth.getUser();
+  const user_id = userResponse.data?.user?.id;
+
+  try {
+    // Validate the blog exists and belongs to the user
+    const { data: blog, error: blogError } = await supabase
+      .from('blogs')
+      .select('user_id')
+      .eq('id', blogId) // Ensure `blogId` is a number
+      .single();
+
+    if (blogError) {
+      console.error('Error fetching blog:', blogError);
+      return { success: false, message: 'Failed to verify blog ownership.' };
+    }
+
+    if (blog.user_id !== user_id) {
+      console.log(`Unauthorized delete attempt by user: ${user_id}`);
+      return { success: false, message: 'Unauthorized to delete this blog.' };
+    }
+
+    const { error: deleteError } = await supabase
+      .from('blogs')
+      .delete()
+      .eq('id', blogId);
+
+    if (deleteError) {
+      console.error('Error deleting blog from Supabase:', deleteError);
+      return { success: false, message: 'Failed to delete blog.' };
+    }
+
+    return { success: true, message: 'Blog deleted successfully!' };
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    return { success: false, message: 'Error deleting blog. Please try again.' };
   }
 }
