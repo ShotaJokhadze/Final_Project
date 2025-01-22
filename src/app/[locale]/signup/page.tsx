@@ -19,6 +19,7 @@ export default function Signup() {
 
     try {
       const formData = new FormData(e.target as HTMLFormElement);
+      formData.set('locale', locale);
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
       const name = formData.get("name") as string;
@@ -41,9 +42,6 @@ export default function Signup() {
       } else {
         setMessage({ type: "success", text: result.success || "Signup successful!" });
         setShowSuccessModal(true);
-        setTimeout(() => {
-          window.location.href = `/${locale}`;
-        }, 2000);
       }
     } catch (error: any) {
       setMessage({ type: "error", text: error.message || "An error occurred. Please try again." });

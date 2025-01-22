@@ -22,6 +22,8 @@ export async function middleware(req: NextRequest) {
   
   const isLoginPage = req.nextUrl.pathname.includes("/login");
   const isSignupPage = req.nextUrl.pathname.includes("/signup");
+  const isForgotPasswordPage = req.nextUrl.pathname.includes("/forgot-password");
+  const isResetPasswordPage = req.nextUrl.pathname.includes("/reset-password");
   const isRestrictedPage = [
     "/contact",
     "/profile",
@@ -33,7 +35,7 @@ export async function middleware(req: NextRequest) {
   ].some((path) => req.nextUrl.pathname.includes(path));
 
   // Redirect logged-in users away from login or signup pages
-  if (session && (isLoginPage || isSignupPage)) {
+  if (session && (isLoginPage || isSignupPage || isForgotPasswordPage || isResetPasswordPage)) {
     const locale = req.nextUrl.pathname.startsWith("/ka") ? "ka" : "en";
     const redirectUrl = new URL(`/${locale}/`, req.url); // Redirect to homepage or dashboard
     return NextResponse.redirect(redirectUrl);

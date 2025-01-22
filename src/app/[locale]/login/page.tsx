@@ -102,7 +102,7 @@ export default function Login() {
           </div>
 
           {/* Sign Up Link */}
-          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400 flex justify-center gap-3">
+          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400 flex justify-between gap-3">
           {t("NotRegistered")}{" "}
             <a
               data-cy="sign-up-link"
@@ -110,6 +110,13 @@ export default function Login() {
               className="text-blue-600 dark:text-blue-400 font-medium hover:underline focus:outline-none"
             >
               {t("Signup")}
+            </a>
+            <a
+              data-cy="sign-up-link"
+              href="./forgot-password"
+              className="font-medium hover:underline focus:outline-none underline"
+            >
+              Forgot Password?
             </a>
           </div>
 

@@ -1,8 +1,7 @@
 import { defineRouting } from "next-intl/routing";
 import { createNavigation } from "next-intl/navigation";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { createClient } from "../../../../../utils/supabase/server";
 
 export const routing = defineRouting({
   locales: ["en", "ka"],
@@ -12,15 +11,14 @@ export const routing = defineRouting({
 export const { Link, redirect, usePathname, useRouter } = createNavigation(routing);
 
 export async function POST(req: NextRequest) {
-  const cookieStore = cookies();
   const formData = await req.formData();
   const email = String(formData.get("email"));
   const password = String(formData.get("password"));
   const name = String(formData.get("name"));
   const phone = String(formData.get("phone"))
-  const supabase = createRouteHandlerClient({
-    cookies: () => cookieStore,
-  });
+  const locale = formData.get("locale") as string || 'en';
+
+  const supabase = await createClient()
 
   const { error } = await supabase.auth.signUp({
     email,
@@ -30,10 +28,9 @@ export async function POST(req: NextRequest) {
         full_name: name,
         phone: phone,
       },
+      emailRedirectTo : `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/login`,
     },
   });
-
-  const locale = cookies().get("locale")?.value || "en";
 
   if (error) {
     console.error("Sign-up error:", error.message);
