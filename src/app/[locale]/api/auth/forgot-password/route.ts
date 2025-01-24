@@ -1,16 +1,14 @@
-"use server";
-
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "../../../../../utils/supabase/server";
 
-export const forgotPasswordAction = async (formData: FormData) => {
-  const email = formData.get("email") as string;
-  const locale = formData.get("locale") as string || 'en';
-
+export async function POST(req: NextRequest) {
   try {
+    const formData = await req.formData();
+    const email = formData.get("email") as string;
+    const locale = (formData.get("locale") as string) || "en";
+
     if (!email) {
-      return {
-        error: "Email is required",
-      };
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     const supabase = await createClient();
@@ -20,16 +18,16 @@ export const forgotPasswordAction = async (formData: FormData) => {
     });
 
     if (error) {
-      return {
-        error: error.message,
-      };
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
-    return {
+
+    return NextResponse.json({
       message: "Password reset email sent. Please check your inbox.",
-    };
+    });
   } catch (error) {
-    return {
-      error: "An unexpected error occurred. Please try again later.",
-    };
+    return NextResponse.json(
+      { error: "An unexpected error occurred. Please try again later." },
+      { status: 500 }
+    );
   }
-};
+}

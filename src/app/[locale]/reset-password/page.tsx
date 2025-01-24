@@ -2,43 +2,53 @@
 
 import { useState } from "react";
 import { useLocale } from "next-intl";
-import { resetPasswordAction } from "../api/auth/reset-password/route";
 import { useSearchParams } from "next/navigation";
 
 export default function ResetPassword() {
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code") as string;
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const code = searchParams.get('code');
 
-  const handleSubmit = async (formData: FormData) => {
-    setIsLoading(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setErrorMessage(null);
     setSuccessMessage(null);
-  
-    // Create a new FormData object and set all required fields
-    const submissionData = new FormData();
-    submissionData.set('password', password);
-    submissionData.set('confirmPassword', confirmPassword);
-    submissionData.set('locale', locale);
-    if (code) {
-      submissionData.set('code', code);
-    }
-  
+
+    setIsLoading(true);
+
     try {
-      const result = await resetPasswordAction(submissionData);
-  
+      // Prepare the request
+      const response = await fetch(`/${locale}/api/auth/reset-password`, {
+        method: "POST",
+        body: new URLSearchParams({
+          password,
+          confirmPassword,
+          locale,
+          code,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "An unknown error occurred");
+      }
+
+      // Handle success or error messages
       if (result.error) {
         setErrorMessage(result.error);
       } else if (result.message) {
         setSuccessMessage(result.message);
       }
-    } catch (error) {
-      setErrorMessage("An unexpected error occurred. Please try again later.");
+    } catch (error: any) {
+      setErrorMessage(error.message || "An unexpected error occurred. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -51,7 +61,8 @@ export default function ResetPassword() {
           Reset Your Password
         </h2>
 
-        <form action={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Password Field */}
           <div className="flex flex-col space-y-3">
             <label
               htmlFor="password"
@@ -62,6 +73,7 @@ export default function ResetPassword() {
             <input
               type="password"
               id="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
@@ -71,6 +83,7 @@ export default function ResetPassword() {
             />
           </div>
 
+          {/* Confirm Password Field */}
           <div className="flex flex-col space-y-3">
             <label
               htmlFor="confirmPassword"
@@ -81,6 +94,7 @@ export default function ResetPassword() {
             <input
               type="password"
               id="confirmPassword"
+              name="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
@@ -90,19 +104,22 @@ export default function ResetPassword() {
             />
           </div>
 
+          {/* Submit Button */}
           <button
             className={`w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg transition-all duration-300 focus:outline-none dark:bg-blue-700 
-              ${isLoading 
-                ? 'opacity-50 cursor-not-allowed' 
-                : 'hover:bg-blue-700 dark:hover:bg-blue-800'}`}
+              ${isLoading
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-blue-700 dark:hover:bg-blue-800"
+              }`}
             type="submit"
             disabled={isLoading}
           >
-            {isLoading ? 'Resetting...' : 'Reset Password'}
+            {isLoading ? "Resetting..." : "Reset Password"}
           </button>
 
+          {/* Error and Success Messages */}
           {errorMessage && (
-            <div className="text-center text-red mt-4">
+            <div className="text-center text-red-600 mt-4">
               <strong>{errorMessage}</strong>
             </div>
           )}

@@ -1,14 +1,5 @@
-import { defineRouting } from "next-intl/routing";
-import { createNavigation } from "next-intl/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "../../../../../utils/supabase/server";
-
-export const routing = defineRouting({
-  locales: ["en", "ka"],
-  defaultLocale: "en",
-});
-
-export const { Link, redirect, usePathname, useRouter } = createNavigation(routing);
 
 export async function POST(req: NextRequest) {
   const formData = await req.formData();

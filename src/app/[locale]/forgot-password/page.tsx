@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { forgotPasswordAction } from "../api/auth/forgot-password/route";
 
 export default function ForgotPassword() {
   const locale = useLocale();
@@ -12,14 +11,31 @@ export default function ForgotPassword() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     setIsLoading(true);
     setErrorMessage(null);
     setSuccessMessage(null);
 
     try {
-      formData.set('locale', locale);
-      const result = await forgotPasswordAction(formData);
+      const formData = new FormData(e.target as HTMLFormElement);
+      const email = formData.get("email") as string;
+
+      const response = await fetch(`/${locale}/api/auth/login`, {
+        method: "POST",
+        body: new URLSearchParams({
+          email,
+          locale
+        }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "An unknown error occurred");
+      }
+
+      const result = await response.json();
 
       if (result.error) {
         setErrorMessage(result.error);
@@ -40,7 +56,7 @@ export default function ForgotPassword() {
           {t("title")}
         </h2>
 
-        <form action={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col space-y-3">
             <label
               htmlFor="email"
