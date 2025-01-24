@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function ResetPassword() {
   const locale = useLocale();
@@ -24,7 +25,6 @@ export default function ResetPassword() {
     setIsLoading(true);
 
     try {
-      // Prepare the request
       const response = await fetch(`/${locale}/api/auth/reset-password`, {
         method: "POST",
         body: new URLSearchParams({
@@ -46,6 +46,9 @@ export default function ResetPassword() {
         setErrorMessage(result.error);
       } else if (result.message) {
         setSuccessMessage(result.message);
+        setTimeout(() => {
+          window.location.href = `/${locale}/login`;
+        }, 2000); 
       }
     } catch (error: any) {
       setErrorMessage(error.message || "An unexpected error occurred. Please try again later.");

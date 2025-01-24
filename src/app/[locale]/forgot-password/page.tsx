@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 export default function ForgotPassword() {
   const locale = useLocale();
-  const t = useTranslations("ForgotPassword");
+  // const t = useTranslations("ForgotPassword");
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -20,14 +20,11 @@ export default function ForgotPassword() {
 
     try {
       const formData = new FormData(e.target as HTMLFormElement);
-      const email = formData.get("email") as string;
+      formData.append('locale', locale);
 
-      const response = await fetch(`/${locale}/api/auth/login`, {
+      const response = await fetch(`/${locale}/api/auth/forgot-password`, {
         method: "POST",
-        body: new URLSearchParams({
-          email,
-          locale
-        }),
+        body: formData
       });
       
       if (!response.ok) {
@@ -53,7 +50,7 @@ export default function ForgotPassword() {
     <div className="flex flex-grow items-center justify-center h-full">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-sm m-4 rounded-xl p-6 space-y-6">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-          {t("title")}
+          Forgot Password
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -62,7 +59,7 @@ export default function ForgotPassword() {
               htmlFor="email"
               className="font-medium text-gray-800 dark:text-gray-300"
             >
-              {t("Email")}
+              Email
             </label>
             <input
               data-cy="forgot-password-email-input"
@@ -84,7 +81,7 @@ export default function ForgotPassword() {
             type="submit"
             disabled={isLoading}
           >
-            {isLoading ? 'Sending...' : t("SubmitButton")}
+            {isLoading ? 'Sending...' : 'Submit Button'}
           </button>
 
           {errorMessage && (

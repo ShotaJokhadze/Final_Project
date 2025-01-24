@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (exchangeError) {
+    if (!data || exchangeError) {
       return NextResponse.json(
         { error: "Invalid or expired reset code." },
         { status: 400 }
@@ -44,7 +44,6 @@ export async function POST(req: NextRequest) {
     }
 
     const { error: updateError } = await supabase.auth.updateUser({ password });
-
     if (updateError) {
       return NextResponse.json(
         { error: updateError.message || "Failed to update the password." },
@@ -52,8 +51,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Revoke the session after password update
+    const { error: signOutError } = await supabase.auth.signOut();
+    if (signOutError) {
+      return NextResponse.json(
+        { error: "Failed to sign out the user. Please try again." },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { message: "Password was changed successfully. Please log in." },
+      { message: "Password was changed successfully. Please log in with your new password." },
       { status: 200 }
     );
   } catch (error) {

@@ -4,8 +4,8 @@ import { createClient } from "../../../../../utils/supabase/server";
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    const email = formData.get("email") as string;
-    const locale = (formData.get("locale") as string) || "en";
+    const email = formData.get("email")?.toString();
+    const locale = formData.get("locale")?.toString() || "en";
 
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
