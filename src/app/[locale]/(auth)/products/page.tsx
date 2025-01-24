@@ -61,7 +61,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
       <div className="products-top flex justify-between items-center w-full">
         <h1>Our Products</h1>
         <Link 
-          className="bg-mediumGray text-light rounded-md p-3 hover:bg-gray-900 transition-all" 
+          className="bg-mediumGray text-light rounded-md p-3 hover:bg-gray-900 transition-all"  data-cy='create-product-link'
           href={`/${locale}/create-product`}
         >
           Create Product

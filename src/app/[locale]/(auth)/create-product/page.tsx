@@ -10,16 +10,6 @@ interface FormData extends Omit<Product, 'id' | 'price'> {
   price: string;
 }
 
-interface FormErrors {
-  title?: string;
-  description?: string;
-  price?: string;
-  brand?: string;
-  image?: string;
-  title_ge?: string;
-  description_ge?: string;
-}
-
 export default function CreateProduct() {
   const [formData, setFormData] = useState<FormData>({
     title: '',
@@ -32,31 +22,26 @@ export default function CreateProduct() {
   });
 
   const [addGeorgian, setAddGeorgian] = useState(false);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [messages, setMessages] = useState({ success: '', error: '' });
   
   const router = useRouter();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: name === 'price' ? value && !isNaN(+value) ? +value : value : value, 
+      [name]: name === 'price' ? (!isNaN(+value) ? +value : value) : value,
     }));
-  
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
   
 
   const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
+    const newErrors:  Record<string, string> = {};
     
     if (!formData.title.trim()) newErrors.title = 'Title is required';
     if (!formData.description.trim()) newErrors.description = 'Description is required';
@@ -82,37 +67,23 @@ export default function CreateProduct() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
-    if (validateForm()) {
-      try {
-        const inputData = new FormData(e.target as HTMLFormElement);
-        const response = await createProduct(inputData);
-  
-        if (response.success) {
-          // Set success message
-          setSuccessMessage(response.message);
-          
-          // Redirect to /products after 2 seconds
-          setTimeout(() => {
-            router.push('/products'); // Redirect to products page
-          }, 2000);
-        } else {
-          // Set error message
-          setSuccessMessage('');
-          setErrors(prev => ({
-            ...prev,
-            submit: response.message
-          }));
-        }
-      } catch (error) {
-        console.error('Error creating product:', error);
-        setErrors(prev => ({
-          ...prev,
-          submit: 'An unexpected error occurred. Please try again later.'
-        }));
+    try {
+      const inputData = new FormData(e.target as HTMLFormElement);
+      const response = await createProduct(inputData);
+
+      if (response.success) {
+        setMessages({ success: response.message, error: '' });
+        setTimeout(() => router.push('/products'), 2000);
+      } else {
+        setMessages({ success: '', error: response.message });
       }
+    } catch (error) {
+      console.error('Error creating product:', error);
+      setMessages({ success: '', error: 'An unexpected error occurred. Please try again.' });
     }
   };
 
@@ -141,6 +112,7 @@ export default function CreateProduct() {
             value={formData.title}
             onChange={handleChange}
             className={inputClasses(errors.title)}
+            data-cy='create-product-title'
           />
           {errors.title && <p className="text-red dark:text-red text-sm">{errors.title}</p>}
         </div>
@@ -156,6 +128,7 @@ export default function CreateProduct() {
             onChange={handleChange}
             rows={4}
             className={inputClasses(errors.description)}
+            data-cy='create-product-description'
           />
           {errors.description && <p className="text-red dark:text-red text-sm">{errors.description}</p>}
         </div>
@@ -172,6 +145,7 @@ export default function CreateProduct() {
             value={formData.price}
             onChange={handleChange}
             className={inputClasses(errors.price)}
+            data-cy='create-product-price'
           />
           {errors.price && <p className="text-red dark:text-red text-sm">{errors.price}</p>}
         </div>
@@ -186,6 +160,7 @@ export default function CreateProduct() {
             value={formData.brand}
             onChange={handleChange}
             className={inputClasses(errors.brand)}
+            data-cy='create-product-brand'
           />
           {errors.brand && <p className="text-red dark:text-red text-sm">{errors.brand}</p>}
         </div>
@@ -200,6 +175,7 @@ export default function CreateProduct() {
             value={formData.image}
             onChange={handleChange}
             className={inputClasses(errors.image)}
+            data-cy='create-product-image'
           />
           {errors.image && <p className="text-red dark:text-red text-sm">{errors.image}</p>}
         </div>
@@ -262,17 +238,15 @@ export default function CreateProduct() {
                    focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 
                    focus:ring-offset-2 dark:focus:ring-offset-gray-900 
                    transition-colors"
+                   data-cy='create-product-button'
         >
           Create Product
         </button>
       </form>
 
       {/* Success Message */}
-      {successMessage && (
-        <div className="mt-4 p-4 text-green-800 rounded-md">
-          {successMessage}
-        </div>
-      )}
+      {messages.success && <div className="mt-4 p-4 text-green-800 bg-green-100 rounded-md" data-cy='create-product-success-message'>{messages.success}</div>}
+      {messages.error && <div className="mt-4 p-4 text-red-800 bg-red-100 rounded-md" data-cy='create-product-error-message'>{messages.error}</div>}
     </div>
   );
 }

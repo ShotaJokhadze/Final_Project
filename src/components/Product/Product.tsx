@@ -68,7 +68,7 @@ const Product: React.FC<ProductProps> = ({
             </div>
           )}
           <img 
-            className={`h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105 ${
+            className={`h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             src={image} 
