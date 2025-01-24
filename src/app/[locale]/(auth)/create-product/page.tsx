@@ -84,9 +84,6 @@ export default function CreateProduct() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    
-
-    console.log({formData: formData})
 
     if (validateForm()) {
       try {

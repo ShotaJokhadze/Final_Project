@@ -111,7 +111,7 @@ export default function Login() {
               {t("Signup")}
             </a>
             <a
-              data-cy="sign-up-link"
+              data-cy="forgot-password-link"
               href="./forgot-password"
               className="font-medium hover:underline focus:outline-none underline"
             >

@@ -66,7 +66,6 @@ export default function CreateBlog() {
 
     if (validateForm()) {
       try {
-        console.log(formData);
         const inputData = new FormData(e.target as HTMLFormElement);
         const response = await createBlog(inputData);
   

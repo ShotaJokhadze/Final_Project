@@ -35,7 +35,6 @@ interface BlogPostPageProps {
 const BlogPostPage: React.FC<BlogPostPageProps> = async ({ params }) => {
   try {
     const post = await getBlogPost(params.id);
-    console.log(post);
 
     return <Blog {...post} />;
   } catch (error: any) {

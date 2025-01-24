@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
   const cookieStore = cookies();
-  console.log("Cookies passed to Supabase:", cookieStore.getAll());
 
   const supabase = createRouteHandlerClient({
     cookies: () => cookieStore,
