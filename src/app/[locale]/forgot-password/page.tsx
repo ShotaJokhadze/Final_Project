@@ -26,7 +26,7 @@ export default function ForgotPassword() {
       } else if (result.message) {
         setSuccessMessage(result.message);
       }
-    } catch (error: any) {
+    } catch (error) {
       setErrorMessage("An unexpected error occurred. Please try again later.");
     } finally {
       setIsLoading(false);

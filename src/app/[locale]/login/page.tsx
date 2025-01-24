@@ -9,6 +9,7 @@ export default function Login() {
   const t = useTranslations('Login');
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,12 +21,10 @@ export default function Login() {
 
       const response = await fetch(`/${locale}/api/auth/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
         body: new URLSearchParams({
           email,
           password,
+          locale
         }),
       });
 
@@ -33,8 +32,8 @@ export default function Login() {
 
       if (!response.ok) {
         setErrorMessage(result.error || "An unknown error occurred.");
-      } else {
-        setErrorMessage(result.message || "An unknown error occurred.");
+      } else if (result.message){
+        setSuccessMessage(result.message);
         setTimeout(() => {
           window.location.href = result.redirectTo;
         }, 2000);
@@ -146,6 +145,14 @@ export default function Login() {
               className="text-center text-red mt-4"
             >
               <strong>{errorMessage}</strong>
+            </div>
+          )}
+          {successMessage && (
+            <div
+              data-cy="login-success-message"
+              className="text-center text-green-600 mt-4"
+            >
+              <strong>{successMessage}</strong>
             </div>
           )}
         </form>

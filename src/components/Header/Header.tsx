@@ -48,6 +48,35 @@ export default function Header(): JSX.Element {
     }
   };
 
+  if (session === false) {
+    return (
+      <nav
+        id="topnav"
+        className="bg-darkGray w-full sticky top-0 z-50 text-light dark:bg-light dark:text-darkGray py-1"
+      >
+        <div className="navbar-container relative flex w-[90%] sm:w-4/5 max-w-screen-xl justify-between mx-auto items-center">
+          <div className="logo p-3">
+            <Link className="w-full h-full block text-3xl" href="/">
+              Home
+            </Link>
+          </div>
+
+          {/* Right-side items for non-authenticated users */}
+          <div className="flex items-center gap-3">
+            <AuthControls
+              session={session}
+              locale={locale}
+              handleLogout={handleLogout}
+              t={t}
+            />
+            <AppearanceSwitch />
+            <LanguageSwitcher />
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <nav
       id="topnav"

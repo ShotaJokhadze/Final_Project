@@ -1,21 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { createClient } from "../../../../../utils/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const cookieStore = cookies();
     const formData = await req.formData();
     const email = String(formData.get("email"));
     const password = String(formData.get("password"));
+    const locale = String(formData.get("locale"));
 
     const supabase = await createClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-
-    const locale = cookieStore.get("locale")?.value || "en";
 
     if (error) {
       console.error("Login error:", error.message);
