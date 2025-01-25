@@ -3,7 +3,7 @@
 import React from 'react';
 import { BlogType } from '../../types/blogs';
 import DeleteBlog from '../DeletePostButton/DeletePostButton';
-import { Tag, Trash2 } from 'lucide-react';
+import { Tag} from 'lucide-react';
 
 const Blog: React.FC<BlogType> = (props) => {
  const { title, description, tag, id } = props;
