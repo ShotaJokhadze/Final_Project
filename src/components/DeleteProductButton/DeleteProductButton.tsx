@@ -62,6 +62,7 @@ const DeleteProduct: React.FC<DeleteProductProps> = ({ id }) => {
       {modalVisible && (
         <div 
           className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+          data-cy="delete-product-modal"
         >
           <div 
             className="
