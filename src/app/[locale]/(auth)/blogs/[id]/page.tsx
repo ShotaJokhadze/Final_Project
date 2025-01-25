@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import Blog from "../../../../../components/Blog/Blog";
 import { BlogType } from "../../../../../types/blogs";
 
@@ -45,18 +46,14 @@ interface BlogPostPageProps {
   };
 }
 
-const BlogPostPage: React.FC<BlogPostPageProps> = async ({ params }) => {
-  try {
-    const { id, locale } = params; 
-    const post = await getBlogPost(id);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { id, locale } = params;  // Extract both id and locale
+  const post = await getBlogPost(id);
 
-    return <Blog {...post} locale={locale}/>;
-  } catch (error) {
-    if (error instanceof Error) {
-      return <div>Error: {error.message}</div>;
-    }
-    return <div>An unexpected error occurred</div>;
+  if (!post) {
+    return notFound();
   }
-};
 
-export default BlogPostPage;
+  // Pass both the product data and locale to the Product component
+  return <Blog {...post} locale={locale}/>;
+}

@@ -5,7 +5,11 @@ import { BlogType } from '../../types/blogs';
 import DeleteBlog from '../DeletePostButton/DeletePostButton';
 import { Tag} from 'lucide-react';
 
-const Blog: React.FC<BlogType> = (props) => {
+interface BlogProps extends BlogType {
+  locale?: string;
+}
+
+const Blog: React.FC<BlogProps> = (props) => {
  const { title, description, tag, id } = props;
 
  return (
