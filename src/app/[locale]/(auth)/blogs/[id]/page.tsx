@@ -25,7 +25,9 @@ export async function generateStaticParams() {
 
 
 async function getBlogPost(id: string): Promise<BlogType> {
-  const res = await fetch(`${baseUrl}/api/blogs/${id}`
+  const res = await fetch(`${baseUrl}/api/blogs/${id}`, {
+    cache : 'no-store'
+  }
   );
 
   if (!res.ok) {
@@ -39,14 +41,16 @@ async function getBlogPost(id: string): Promise<BlogType> {
 interface BlogPostPageProps {
   params: {
     id: string;
+    locale: string;
   };
 }
 
 const BlogPostPage: React.FC<BlogPostPageProps> = async ({ params }) => {
   try {
-    const post = await getBlogPost(params.id);
+    const { id, locale } = params; 
+    const post = await getBlogPost(id);
 
-    return <Blog {...post} />;
+    return <Blog {...post} locale={locale}/>;
   } catch (error) {
     if (error instanceof Error) {
       return <div>Error: {error.message}</div>;
