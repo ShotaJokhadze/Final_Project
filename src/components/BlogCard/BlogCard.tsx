@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { BlogType } from "../../types/blogs";
 import { PostsButton } from "../Button/Buttons";
-import DeleteBlog from "../DeletePostButton/DeletePostButton";
 
 
 interface BlogCardProps {
@@ -26,7 +25,7 @@ export default function BlogCard({ post, title, description, locale, tag }: Blog
       <p className="text-gray-600 dark:text-gray-300 text-sm text-center flex-grow line-clamp-4 mb-4">
         {description}
       </p>
-      <div className="flex justify-center space-x-2">
+      <div className="flex justify-center items-center space-x-2">
         <PostsButton id={post.id} />
         <Link
           href={`/${locale}/edit-blog/${post.id}`}
@@ -34,7 +33,6 @@ export default function BlogCard({ post, title, description, locale, tag }: Blog
         >
           Edit
         </Link>
-        <DeleteBlog id={post.id}/>
       </div>
     </div>
    </div>

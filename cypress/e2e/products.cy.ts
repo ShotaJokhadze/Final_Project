@@ -1,12 +1,13 @@
 describe('products', () => {
   const validEmail = 'test@gmail.com';
   const validPassword = 'Testuser123';
+  const uniqueTitle = `TestProduct-${Date.now()}`;
 
   beforeEach(() => {
     cy.visit('/en');
   });
 
-  it('adds product successfully', () => {
+  it('adds and deletes product successfully', () => {
     cy.get('[data-cy="login-in"]').click();
     cy.get('[data-cy="login-email-input"]').type(validEmail);
     cy.get('[data-cy="login-password-input"]').type(validPassword);
@@ -16,7 +17,7 @@ describe('products', () => {
     cy.visit('/en/products');
     
     cy.get('[data-cy="create-product-link"]').click(); 
-    cy.get('[data-cy="create-product-title"]').type('TestProduct');
+    cy.get('[data-cy="create-product-title"]').type(uniqueTitle);
     cy.get('[data-cy="create-product-description"]').type('TestProductDescription');
     cy.get('[data-cy="create-product-price"]').type('123');
     cy.get('[data-cy="create-product-brand"]').type('TestBrand');
@@ -28,5 +29,22 @@ describe('products', () => {
     cy.get('[data-cy="create-product-success-message"]')
       .should('be.visible')
       .and('not.be.empty');
-  })
+
+    cy.wait(2000);
+
+    cy.reload();
+
+    cy.get(`[data-cy="product-card"]`).contains(uniqueTitle).parents('[data-cy="product-card"]').contains('View Product').click();
+
+    cy.contains('Delete').click();
+
+    cy.get('[data-cy="delete-product-modal"]').should('be.visible').contains('Product deleted successfully');
+
+    cy.wait(2000);
+
+    cy.reload();
+
+    cy.get('[data-cy="product-card"]')
+    .should('not.contain', uniqueTitle); 
+    })
 })

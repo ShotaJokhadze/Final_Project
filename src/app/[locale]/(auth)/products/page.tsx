@@ -74,6 +74,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
           <div
             className="card w-[300px] border border-mediumGray relative h-[390px] flex flex-col justify-around gap-2 max-w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors duration-300 overflow-hidden"
             key={product.id}
+            data-cy='product-card'
           >
             <Card
               key={product.id}
@@ -82,6 +83,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
               content={getLocalizedText(product.description_ge, product.description)}
               price={product.price}
               image={product.image}
+              data-cy={`product-card-${product.title}`}
             />
           </div>
         ))}

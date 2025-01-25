@@ -67,3 +67,43 @@ export async function createProduct(inputData: FormData) {
     return { success: false, message: 'Error creating product. Please try again.' };
   }
 }
+
+export async function deleteProduct(ProductId: number) {
+  const supabase = await createClient();
+
+  const userResponse = await supabase.auth.getUser();
+  const user_id = userResponse.data?.user?.id;
+
+  try {
+    const { data: product, error: productError } = await supabase
+      .from('products')
+      .select('user_id')
+      .eq('id', ProductId) 
+      .single();
+
+    if (productError) {
+      console.error('Error fetching product:', productError);
+      return { success: false, message: 'Failed to verify product ownership.' };
+    }
+
+    if (product.user_id !== user_id) {
+      console.log(`Unauthorized delete attempt by user: ${user_id}`);
+      return { success: false, message: 'Unauthorized to delete this product.' };
+    }
+
+    const { error: deleteError } = await supabase
+      .from('products')
+      .delete()
+      .eq('id', ProductId);
+
+    if (deleteError) {
+      console.error('Error deleting product from Supabase:', deleteError);
+      return { success: false, message: 'Failed to delete product.' };
+    }
+
+    return { success: true, message: 'Product deleted successfully!' };
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    return { success: false, message: 'Error deleting product. Please try again.' };
+  }
+}
