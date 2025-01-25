@@ -12,6 +12,7 @@ export async function createBlog(inputData: FormData) {
   const description = inputData.get('description') as string;
   const title_ge = inputData.get('title_ge') as string;
   const description_ge = inputData.get('description_ge') as string;
+  const tag = inputData.get('tag') as string;
   
   if (!title || !description) {
     console.log('Missing required fields');
@@ -24,6 +25,7 @@ export async function createBlog(inputData: FormData) {
       description,
       title_ge, 
       description_ge,
+      tag,
       user_id
     }).single()
     
@@ -49,6 +51,7 @@ export async function editBlog(blogId: string, inputData: FormData) {
   const description = inputData.get('description')?.toString();
   const title_ge = inputData.get('title_ge')?.toString() || null;
   const description_ge = inputData.get('description_ge')?.toString() || null;
+  const tag = inputData.get('tag')?.toString();
 
   if (!title || !description) {
     console.log('Missing required fields');
@@ -83,6 +86,7 @@ export async function editBlog(blogId: string, inputData: FormData) {
       description,
       title_ge,
       description_ge,
+      tag
     };
 
     const { data, error } = await supabase

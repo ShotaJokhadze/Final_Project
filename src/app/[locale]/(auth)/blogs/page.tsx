@@ -5,7 +5,7 @@ import BlogCard from "../../../../components/BlogCard/BlogCard";
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 async function fetchBlogs(): Promise<BlogType[]> {
   const res = await fetch(`${baseUrl}/api/blogs`, {
-    cache: 'no-store'
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -31,6 +31,7 @@ export default async function BlogsPage({ params,}: BlogsPageProps) {
 
   try {
     blogs = await fetchBlogs();
+    console.log(blogs)
   } catch (error) {
     fetchError = (error as Error).message;
   }
@@ -57,21 +58,25 @@ export default async function BlogsPage({ params,}: BlogsPageProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center place-content-center mt-2">
         {fetchError && <p>{fetchError}</p>}
 
-        {blogs &&
+        {blogs.length === 0 ? (
+          <p>No blogs available</p>
+        ) : (
           blogs.map((post) => (
             <div
               className="card w-[300px] border border-mediumGray relative h-[250px] flex flex-col justify-around gap-2 max-w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors duration-300 overflow-hidden"
               key={post.id}
             >
                <BlogCard
-              key={post.id}
-              post={post}
-              locale={locale}
-              title={getLocalizedText(post.title_ge, post.title)}
-              description={getLocalizedText(post.description_ge, post.description)}
-            />
+                key={post.id}
+                post={post}
+                locale={locale}
+                title={getLocalizedText(post.title_ge, post.title)}
+                description={getLocalizedText(post.description_ge, post.description)}
+                tag={post.tag}
+              />
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

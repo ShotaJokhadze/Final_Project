@@ -10,6 +10,7 @@ interface FormErrors {
   title?: string;
   description?: string;
   title_ge?: string;
+  tag?: string;
   description_ge?: string;
   submit?: string;
 }
@@ -19,6 +20,7 @@ export default function CreateBlog() {
     id: 0,
     title: '',
     description: '',
+    tag: '',
     title_ge: '',
     description_ge: ''
   });
@@ -51,6 +53,7 @@ export default function CreateBlog() {
     
     if (!formData.title.trim()) newErrors.title = 'Title is required';
     if (!formData.description.trim()) newErrors.description = 'Description is required';
+    if (!formData.tag.trim()) newErrors.tag = 'Tag is required';
 
     // Georgian validation
     if (addGeorgian) {
@@ -134,6 +137,20 @@ export default function CreateBlog() {
             className={inputClasses(errors.description)}
           />
           {errors.description && <p className="text-red dark:text-red text-sm">{errors.description}</p>}
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="tag" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+            Tag <span className="text-red dark:text-red">*</span>
+          </label>
+          <input
+            id="tag"
+            name="tag"
+            value={formData.tag}
+            onChange={handleChange}
+            className={inputClasses(errors.tag)}
+          />
+          {errors.title && <p className="text-red dark:text-red text-sm">{errors.tag}</p>}
         </div>
 
         {/* Toggle for Georgian Description */}

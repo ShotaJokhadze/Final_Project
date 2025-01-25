@@ -25,8 +25,7 @@ export async function generateStaticParams() {
 
 
 async function getBlogPost(id: string): Promise<BlogType> {
-  const res = await fetch(`${baseUrl}/api/blogs/${id}`,
-    { cache: 'default' }
+  const res = await fetch(`${baseUrl}/api/blogs/${id}`
   );
 
   if (!res.ok) {

@@ -1,4 +1,4 @@
-import { supabase } from "../../../../lib/supabase";
+import { createClient } from "../../../../utils/supabase/server";
 
 interface Params {
   id: string;
@@ -9,6 +9,7 @@ export async function GET(
   { params }: { params: Params }
 ): Promise<Response> {
   const { id } = params;
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("blogs")
