@@ -40,7 +40,7 @@ describe('products', () => {
 
     cy.get('[data-cy="delete-product-modal"]').should('be.visible').contains('Product deleted successfully');
 
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.reload();
 
