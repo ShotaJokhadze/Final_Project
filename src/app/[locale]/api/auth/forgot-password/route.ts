@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "../../../../../utils/supabase/server";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -13,8 +14,9 @@ export async function POST(req: NextRequest) {
 
     const supabase = await createClient();
 
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/reset-password`,
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${baseUrl}/${locale}/reset-password`,
     });
 
     if (error) {
@@ -26,7 +28,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "An unexpected error occurred. Please try again later." },
+      { error },
       { status: 500 }
     );
   }

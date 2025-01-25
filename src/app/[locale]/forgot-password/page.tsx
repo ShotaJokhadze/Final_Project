@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+// import { useTranslations } from "next-intl";
 
 export default function ForgotPassword() {
   const locale = useLocale();
@@ -40,6 +41,7 @@ export default function ForgotPassword() {
         setSuccessMessage(result.message);
       }
     } catch (error) {
+      console.log({'Error': error})
       setErrorMessage("An unexpected error occurred. Please try again later.");
     } finally {
       setIsLoading(false);

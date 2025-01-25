@@ -2,9 +2,11 @@ import { notFound } from "next/navigation";
 import Product from "../../../../../components/Product/Product";
 import { Product as ProductInterface } from "../../../../../types/product";
 
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 async function getProduct(id: string): Promise<ProductInterface> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`,
+    `${baseUrl}/api/products/${id}`,
     { cache: 'no-store' }  // Added this to ensure fresh data
   );
 

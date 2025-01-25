@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { redirect } from "next/navigation";
 
 export default function ResetPassword() {
   const locale = useLocale();
@@ -50,8 +49,10 @@ export default function ResetPassword() {
           window.location.href = `/${locale}/login`;
         }, 2000); 
       }
-    } catch (error: any) {
-      setErrorMessage(error.message || "An unexpected error occurred. Please try again later.");
+    } catch (error) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message || "An unexpected error occurred. Please try again later.");
+        }
     } finally {
       setIsLoading(false);
     }

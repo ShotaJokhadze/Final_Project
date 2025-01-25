@@ -1,23 +1,33 @@
 import Blog from "../../../../../components/Blog/Blog";
 import { BlogType } from "../../../../../types/blogs";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`);
+  try {
+    const res = await fetch(`${baseUrl}/api/blogs`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch blog posts");
+    if (!res.ok) {
+      console.error("Failed to fetch blog posts");
+      return [];
+    }
+
+    const data: BlogType[] = await res.json();
+
+    return data.map((post) => ({
+      id: post.id.toString(),
+    }));
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
   }
-
-  const data: BlogType[] = await res.json();
-
-  return data.map((post) => ({
-    id: post.id.toString(),
-  }));
 }
 
+
 async function getBlogPost(id: string): Promise<BlogType> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs/${id}`);
+  const res = await fetch(`${baseUrl}/api/blogs/${id}`,
+    { cache: 'default' }
+  );
 
   if (!res.ok) {
     throw new Error(`Failed to fetch blog post with ID: ${id}`);
@@ -25,6 +35,7 @@ async function getBlogPost(id: string): Promise<BlogType> {
 
   return res.json();
 }
+
 
 interface BlogPostPageProps {
   params: {
@@ -37,8 +48,11 @@ const BlogPostPage: React.FC<BlogPostPageProps> = async ({ params }) => {
     const post = await getBlogPost(params.id);
 
     return <Blog {...post} />;
-  } catch (error: any) {
-    return <div>Error: {error.message}</div>;
+  } catch (error) {
+    if (error instanceof Error) {
+      return <div>Error: {error.message}</div>;
+    }
+    return <div>An unexpected error occurred</div>;
   }
 };
 

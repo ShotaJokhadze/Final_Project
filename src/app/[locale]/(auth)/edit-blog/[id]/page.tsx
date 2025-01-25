@@ -36,7 +36,7 @@ export default function EditBlog({ params }: EditBlogProps) {
   const [isLoading, setIsLoading] = useState(true);
   
   const router = useRouter();
-  const { id, locale } = params;
+  const { id } = params;
 
   useEffect(() => {
     const loadBlog = async () => {
@@ -52,6 +52,7 @@ export default function EditBlog({ params }: EditBlogProps) {
           setErrors({ submit: 'Failed to load blog data' });
         }
       } catch (error) {
+        console.error({"error" : error})
         setErrors({ submit: 'Error loading blog data' });
       } finally {
         setIsLoading(false);

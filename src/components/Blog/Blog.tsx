@@ -9,7 +9,7 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = (props) => {
-  const { title, description, title_ge, description_ge, id} = props;
+  const { title, description} = props;
 
   return (
     <div className="blog-card w-3/5 p-4 flex flex-col justify-center">

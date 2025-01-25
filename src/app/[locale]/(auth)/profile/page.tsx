@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { createClient } from "../../../../utils/supabase/server";
 
 export default async function ProfileClient() {
@@ -15,9 +16,11 @@ export default async function ProfileClient() {
               <div className="flex items-center gap-6">
                 <div className="relative">
                   {user?.user_metadata?.avatar_url ? (
-                    <img
+                    <Image
                       src={user?.user_metadata?.avatar_url}
                       alt="Avatar"
+                      width={96} 
+                      height={96}
                       className="w-24 h-24 rounded-full object-cover border-4 border-white dark:border-gray-700 shadow-md"
                     />
                   ) : (

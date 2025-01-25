@@ -38,9 +38,11 @@ export default function Login() {
           window.location.href = result.redirectTo;
         }, 2000);
       }
-    } catch (error: any) {
-      setErrorMessage(error.message || "An error occurred during login.");
-    }
+    } catch (error) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message || "An error occurred during login.");
+        }
+      }
   };
 
   const handleGithubLogin = async () => {
@@ -48,9 +50,10 @@ export default function Login() {
       provider: "github",
       options: {
         redirectTo: `${window.location.origin}/${locale}/api/auth/callback`,
+        scopes: 'user:email', // Optional: specify OAuth scopes
       },
     });
-
+  
     if (error) {
       setErrorMessage(error.message);
     }

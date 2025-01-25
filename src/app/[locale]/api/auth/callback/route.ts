@@ -1,8 +1,5 @@
 import { createClient } from "../../../../../utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { defineRouting } from "next-intl/routing";
-import { createNavigation } from "next-intl/navigation";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -11,12 +8,11 @@ export async function GET(req: NextRequest) {
 
   if (code) {
     // Initialize Supabase using the custom createClient
-    const cookieStore = cookies();
     const supabase = await createClient(); // Ensure createClient is awaited
 
     try {
       // Exchange the authorization code for a session
-      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
 
       if (error) {
         console.error("Error during code exchange:", error.message);

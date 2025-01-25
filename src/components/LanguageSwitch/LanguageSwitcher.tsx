@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useLocale} from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import GeoFlag from "../../assets/georgia.png";
 import USFlag from "../../assets/united-states.png";
+import Image from "next/image";
 
 export default function LanguageSwitcher(): JSX.Element {
-  const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -25,12 +24,24 @@ export default function LanguageSwitcher(): JSX.Element {
       <div className="text-light h-10 flex items-center text-center">
         {pathname.includes("/ka") ? (
           <li className="flex items-center cursor-pointer p-2 hover:-translate-y-0.5 transition-all justify-around gap-1">
-            <img src={GeoFlag.src} alt="Georgian Flag" />
+            <Image
+              src={GeoFlag.src}
+              alt="US Flag"
+              width={24} 
+              height={16}
+              className="inline-block" 
+            />
             <span className="hidden sm:inline">ქარ</span>
           </li>
         ) : (
           <li className="flex items-center cursor-pointer p-2 hover:-translate-y-0.5 transition-all justify-around gap-1">
-            <img src={USFlag.src} alt="US Flag" />
+            <Image
+              src={USFlag.src}
+              alt="US Flag"
+              width={24} 
+              height={16}
+              className="inline-block" 
+            />
             <span className="hidden sm:inline">En</span>
           </li>
         )}
@@ -41,14 +52,26 @@ export default function LanguageSwitcher(): JSX.Element {
             onClick={() => changeLanguage("en")}
             className="flex items-center cursor-pointer p-2 hover:-translate-y-0.5 transition-all justify-around gap-1"
           >
-            <img src={USFlag.src} alt="US Flag" />
+            <Image
+              src={USFlag.src}
+              alt="US Flag"
+              width={24} 
+              height={16}
+              className="inline-block" 
+            />
             <span className="hidden sm:inline">En</span>
           </li>
           <li
             onClick={() => changeLanguage("ka")}
             className="flex items-center cursor-pointer p-2 hover:-translate-y-0.5 transition-all justify-around gap-1"
           >
-            <img src={GeoFlag.src} alt="Georgian Flag" />
+            <Image
+              src={GeoFlag.src}
+              alt="US Flag"
+              width={24} 
+              height={16}
+              className="inline-block" 
+            />
             <span className="hidden sm:inline">ქარ</span>
           </li>
         </ul>

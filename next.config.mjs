@@ -21,6 +21,7 @@ const nextConfig = {
         pathname: "/**", // Allows all paths under dummyjson.com
       },
     ],
+    domains: ["avatars.githubusercontent.com"],
   },
 };
 

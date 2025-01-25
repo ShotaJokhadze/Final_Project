@@ -3,8 +3,10 @@ import { Pagination } from "../../../../components/Pagination/Pagination";
 import { Product } from "../../../../types/product";
 import Link from "next/link";
 
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
+  const res = await fetch(`${baseUrl}/api/products`, {
     cache: "no-store",
   });
 

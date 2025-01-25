@@ -15,7 +15,7 @@ export async function middleware(req: NextRequest) {
   const supabase = createClient();
   
   // Get session from Supabase
-  const { data, error } = await (await supabase).auth.getSession();
+  const { data } = await (await supabase).auth.getSession();
   
   // Check if data is present and session is not null
   const session = data?.session;

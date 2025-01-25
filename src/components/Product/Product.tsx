@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { Product as ProductInterface } from "../../types/product";
 import { ZoomIn, X } from 'lucide-react';
 import Loader from '../Loader/Loader';
+import Image from 'next/image';
 
 interface ProductProps extends ProductInterface {
   locale?: string;
@@ -67,14 +68,17 @@ const Product: React.FC<ProductProps> = ({
               <Loader />
             </div>
           )}
-          <img 
-            className={`h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            src={image} 
+          <Image
+            src={image}
             alt={localizedTitle}
-            onLoad={handleImageLoad}
-          />
+            className={`h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 ${
+              imageLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            onLoadingComplete={handleImageLoad}
+            width={0}
+            height={0}
+            sizes="100vw"
+          />  
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
             <span className="text-white opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300">
               <ZoomIn className="w-6 h-6" />
@@ -125,13 +129,16 @@ const Product: React.FC<ProductProps> = ({
             >
               <X className="w-5 h-5" />
             </button>
-            <img 
-              className="max-w-full max-h-[85vh] object-contain rounded-lg" 
-              src={image} 
+            <Image
+              src={image}
               alt={localizedTitle}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              width={800} 
+              height={600} 
+              sizes="100vw"
             />
           </div>
-        </div>
+        </div>  
       )}
     </div>
   );

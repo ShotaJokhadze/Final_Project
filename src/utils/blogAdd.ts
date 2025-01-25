@@ -1,7 +1,6 @@
 'use server'
 
 import { createClient } from "./supabase/server"
-import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function createBlog(inputData: FormData) {
   const supabase = await createClient()

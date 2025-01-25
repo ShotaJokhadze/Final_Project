@@ -19,11 +19,13 @@ const DeleteBlog: React.FC<DeleteBlogProps> = ({ id }) => {
 
       setModalMessage(result.message || "Product deleted successfully!");
       setModalVisible(true);
-    } catch (error: any) {
-      const errorMessage = error.message || "An unexpected error occurred.";
-      setModalMessage(errorMessage);
-      setModalVisible(true);
-      console.error("Error deleting product:", errorMessage);
+    } catch (error) {
+        if (error instanceof Error) { 
+          const errorMessage = error.message || "An unexpected error occurred.";
+          setModalMessage(errorMessage);
+          setModalVisible(true);
+          console.error("Error deleting product:", errorMessage);
+        }
     }
   };
 

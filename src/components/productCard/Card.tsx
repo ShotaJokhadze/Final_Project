@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ProductButton } from '../Button/Buttons';
 import { FC } from 'react';
 
@@ -13,7 +14,14 @@ const Card: FC<CardProps> = ({ id, header, content, price, image }) => {
   return (
     <>
       <div className="w-full h-1/2">
-        <img src={image} alt="" className='w-full h-full block object-contain'/>
+        <Image
+          src={image}
+          alt=""
+          className="w-full h-full block object-contain"
+          width={0}
+          height={0}
+          sizes="100vw"
+        />
       </div>
       <div className="h-1/2 w-full p-3 text-center flex flex-col gap-1 justify-between">
         <h3 className='text-xl font-semibold text-gray-900 dark:text-gray-100'>{header}</h3>

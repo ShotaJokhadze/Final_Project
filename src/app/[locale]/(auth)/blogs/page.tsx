@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { PostsButton } from "../../../../components/Button/Buttons";
 import { BlogType } from "../../../../types/blogs";
 import BlogCard from "../../../../components/BlogCard/BlogCard";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 async function fetchBlogs(): Promise<BlogType[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blogs`, {
+  const res = await fetch(`${baseUrl}/api/blogs`, {
     cache: 'no-store'
   });
 
@@ -24,7 +24,7 @@ interface BlogsPageProps {
   };
 }
 
-export default async function BlogsPage({ params, searchParams }: BlogsPageProps) {
+export default async function BlogsPage({ params,}: BlogsPageProps) {
   let blogs: BlogType[] = [];
   let fetchError: string | null = null;
   const { locale } = params;

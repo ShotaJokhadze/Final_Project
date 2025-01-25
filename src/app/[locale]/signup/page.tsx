@@ -43,8 +43,10 @@ export default function Signup() {
         setMessage({ type: "success", text: result.success || "Signup successful!" });
         setShowSuccessModal(true);
       }
-    } catch (error: any) {
-      setMessage({ type: "error", text: error.message || "An error occurred. Please try again." });
+    } catch (error) {
+      if (error instanceof Error) {
+        setMessage({ type: "error", text: error.message || "An error occurred. Please try again." });
+      }
     } finally {
       setIsLoading(false);
     }
