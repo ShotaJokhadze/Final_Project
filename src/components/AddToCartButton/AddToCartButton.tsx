@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { useCart } from '../../app/Providers/Cart';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 export default function AddToCartButton({ productId }: { productId: number }) {
   const [loading, setLoading] = useState(false);
+  const { cartItemCount, updateCartItemCount } = useCart();
 
   const handleAddToCart = async () => {
     setLoading(true);
@@ -20,6 +22,8 @@ export default function AddToCartButton({ productId }: { productId: number }) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to add to cart');
       }
+
+      updateCartItemCount(cartItemCount + 1);
     } catch (err) {
       console.error(err instanceof Error ? err.message : 'An unknown error occurred');
     } finally {

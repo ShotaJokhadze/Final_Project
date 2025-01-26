@@ -9,12 +9,14 @@ import { useEffect, useState } from "react";
 import { Link } from "../../i18n/routing";
 import AppearanceSwitch from "../AppearanceSwitch/AppearanceSwitch";
 import { Menu, X, ShoppingCart } from "lucide-react";
+import { useCart } from "../../app/Providers/Cart";
 
 export default function Header(): JSX.Element {
   const t = useTranslations("Header");
   const locale = useLocale();
   const [session, setSession] = useState<boolean | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { cartItemCount } = useCart();
 
   const navItems = [
     { href: "/products", label: t("products") },
@@ -96,9 +98,23 @@ export default function Header(): JSX.Element {
 
         {/* Right-side items */}
         <div className="flex items-center gap-3">
-          <Link href='/cart'>
-            <ShoppingCart size={30}/>
-          </Link>
+        <Link href="/cart" className="relative group">
+          <ShoppingCart 
+            size={30} 
+            className="transition-transform group-hover:scale-11" 
+          />
+          {cartItemCount > 0 && (
+            <span className="absolute -top-2 -right-2 
+              bg-red text-white 
+              dark:bg-red dark:text-white 
+              rounded-full text-xs w-5 h-5 
+              flex items-center justify-center 
+              group-hover:animate-none 
+              font-semibold shadow-md">
+              {cartItemCount}
+            </span>
+          )}
+        </Link>
           <AuthControls
             session={session}
             locale={locale}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Trash2, Plus, Minus, ShoppingCart, CreditCard } from "lucide-react";
 import Loader from "../../../../components/Loader/Loader";
 import Image from "next/image";
+import { useCart } from "../../../Providers/Cart";
 
 interface CartItem {
   id: number;
@@ -22,6 +23,7 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { cartItemCount, updateCartItemCount } = useCart();
 
   useEffect(() => {
     fetchCartItems();
@@ -63,6 +65,11 @@ export default function CartPage() {
         throw new Error(errorData.error || "Failed to update quantity");
       }
 
+      const currentItem = cartItems.find(item => item.id === id);
+      const quantityDiff = newQuantity - (currentItem?.quantity || 0);
+
+      updateCartItemCount(cartItemCount + quantityDiff);
+
       setCartItems((prevItems) =>
         prevItems.map((item) =>
           item.id === id ? { ...item, quantity: newQuantity } : item
@@ -81,8 +88,11 @@ export default function CartPage() {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to delete item");
       }
+      const deletedItemQuantity = cartItems.find(item => item.id === id)?.quantity || 0;
 
       setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+
+      updateCartItemCount(cartItemCount - deletedItemQuantity);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     }
