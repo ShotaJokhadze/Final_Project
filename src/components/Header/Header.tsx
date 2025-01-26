@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "../../i18n/routing";
 import AppearanceSwitch from "../AppearanceSwitch/AppearanceSwitch";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 
 export default function Header(): JSX.Element {
   const t = useTranslations("Header");
@@ -96,6 +96,9 @@ export default function Header(): JSX.Element {
 
         {/* Right-side items */}
         <div className="flex items-center gap-3">
+          <Link href='/cart'>
+            <ShoppingCart size={30}/>
+          </Link>
           <AuthControls
             session={session}
             locale={locale}

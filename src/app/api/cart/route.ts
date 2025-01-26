@@ -4,12 +4,11 @@ import { createClient } from "../../../utils/supabase/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log('Received body:', body); // Log the exact input
 
     const { productId, quantity } = body;
 
-    if (!productId || typeof productId !== 'number') {
-      console.error('Invalid productId:', productId);
+    if (!productId || typeof productId !== "number") {
+      console.error("Invalid productId:", productId);
       return NextResponse.json({ error: "Invalid productId" }, { status: 400 });
     }
 
@@ -18,18 +17,41 @@ export async function POST(request: Request) {
     const userResponse = await supabase.auth.getUser();
     const user_id = userResponse.data?.user?.id;
 
-    // Insert into the cart table
-    const { data, error } = await supabase
+    // Check if the product is already in the cart
+    const { data: existingCartItem } = await supabase
       .from("cart")
-      .insert([{ user_id, product_id: productId, quantity }])
+      .select("*")
+      .eq("user_id", user_id)
+      .eq("product_id", productId)
       .single();
 
-    if (error) {
-      console.error("Error inserting into cart:", error.message);
-      return NextResponse.json({ error: "Failed to add product to cart" }, { status: 500 });
-    }
+    if (existingCartItem) {
+      const newQuantity = existingCartItem.quantity + quantity;
 
-    return NextResponse.json({ message: "Added to cart", data }, { status: 200 });
+      const { error: updateError } = await supabase
+        .from("cart")
+        .update({ quantity: newQuantity })
+        .eq("id", existingCartItem.id);
+
+      if (updateError) {
+        console.error("Error updating cart item:", updateError.message);
+        return NextResponse.json({ error: "Failed to update cart item" }, { status: 500 });
+      }
+
+      return NextResponse.json({ message: "Cart item updated", quantity: newQuantity }, { status: 200 });
+    } else {
+      const { data, error: insertError } = await supabase
+        .from("cart")
+        .insert([{ user_id, product_id: productId, quantity }])
+        .single();
+
+      if (insertError) {
+        console.error("Error inserting into cart:", insertError.message);
+        return NextResponse.json({ error: "Failed to add product to cart" }, { status: 500 });
+      }
+
+      return NextResponse.json({ message: "Added to cart", data }, { status: 200 });
+    }
   } catch (error) {
     console.error('Detailed error:', error);
     const errorMessage = error instanceof Error ? error.message : String(error);
