@@ -54,6 +54,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     return notFound();
   }
 
-  // Pass both the product data and locale to the Product component
   return <Blog {...post} locale={locale}/>;
 }

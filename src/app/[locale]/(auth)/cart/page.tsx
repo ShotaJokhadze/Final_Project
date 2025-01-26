@@ -178,7 +178,7 @@ export default function CartPage() {
               ))}
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 w-[280px]">
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 w-[280px] flex flex-col">
               <div className="mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
                   Order Summary
@@ -210,7 +210,7 @@ export default function CartPage() {
                   </span>
                 </div>
               </div>
-              <button className="w-full mt-6 bg-blue-600 dark:bg-blue-500 text-white py-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-semibold text-lg flex items-center justify-center">
+              <button className="w-full mt-6 bg-blue-600 dark:bg-blue-500 text-white py-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-semibold text-lg flex items-center justify-center self-end">
                 <CreditCard className="mr-3" />
                 Checkout
               </button>

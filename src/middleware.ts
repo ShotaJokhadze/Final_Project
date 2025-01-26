@@ -31,7 +31,9 @@ export async function middleware(req: NextRequest) {
     "/about",
     "/products",
     '/create-product',
-    '/create-blog'
+    '/create-blog',
+    '/edit-blog',
+    '/cart'
   ].some((path) => req.nextUrl.pathname.includes(path));
 
   // Redirect logged-in users away from login or signup pages
