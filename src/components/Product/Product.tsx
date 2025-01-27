@@ -58,8 +58,8 @@ const Product: React.FC<ProductProps> = ({
   };
 
   return (
-    <div className="product-card group relative mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    <div className="relative mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-red transform scale-x-0 transition-transform duration-300 origin-left"></div>
       
       {/* Go Back Arrow in Circle */}
       <button 
