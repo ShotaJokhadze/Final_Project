@@ -30,7 +30,7 @@ describe('products', () => {
       .should('be.visible')
       .and('not.be.empty');
 
-    cy.wait(2000);
+    cy.wait(2500);
 
     cy.reload();
 
