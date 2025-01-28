@@ -1,5 +1,4 @@
 'use client'
-import Link from "next/link";
 import { BlogType } from "../../types/blogs";
 import { PostsButton } from "../Button/Buttons";
 
@@ -12,7 +11,7 @@ interface BlogCardProps {
   tag: string;
 }
 
-export default function BlogCard({ post, title, description, locale, tag }: BlogCardProps) {
+export default function BlogCard({ post, title, description, tag }: BlogCardProps) {
   return (
     <div
     className="card w-full max-w-[300px] border border-gray-200 dark:border-gray-700 relative flex flex-col justify-between bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
@@ -27,12 +26,6 @@ export default function BlogCard({ post, title, description, locale, tag }: Blog
       </p>
       <div className="flex justify-center items-center space-x-2">
         <PostsButton id={post.id} />
-        <Link
-          href={`/${locale}/edit-blog/${post.id}`}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
-        >
-          Edit
-        </Link>
       </div>
     </div>
    </div>

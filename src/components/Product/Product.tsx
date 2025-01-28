@@ -1,11 +1,12 @@
 'use client'
 import React, { useState, useCallback } from 'react';
 import { Product as ProductInterface } from "../../types/product";
-import { ZoomIn, X, Tag, DollarSign, ArrowLeft } from 'lucide-react';
+import { ZoomIn, X, Tag, DollarSign, ArrowLeft, Pencil } from 'lucide-react';
 import Loader from '../Loader/Loader';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import DeleteProduct from '../DeleteProductButton/DeleteProductButton';
+import { Link } from '../../i18n/routing';
 
 interface ProductProps extends ProductInterface {
   locale?: string;
@@ -58,8 +59,8 @@ const Product: React.FC<ProductProps> = ({
   };
 
   return (
-    <div className="relative mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-red transform scale-x-0 transition-transform duration-300 origin-left"></div>
+    <div className="relative group mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
       
       {/* Go Back Arrow in Circle */}
       <button 
@@ -69,9 +70,9 @@ const Product: React.FC<ProductProps> = ({
         <ArrowLeft className="w-5 h-5" />
       </button>
 
-      <div className="flex flex-col md:flex-row items-stretch gap-8">
+      <div className="flex flex-col lg:flex-row items-stretch gap-8">
         {/* Image Section */}
-        <div className="w-full md:w-1/2 relative group flex items-center justify-center">
+        <div className="w-full md:w-full lg:w-1/2 relative group flex items-center justify-center">
           <div 
             className="aspect-square rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-700 cursor-zoom-in shadow-md"
             onClick={toggleModal}
@@ -99,7 +100,7 @@ const Product: React.FC<ProductProps> = ({
         </div>
 
         {/* Details Section */}
-        <div className="w-full md:w-1/2 flex flex-col justify-between space-y-6">
+        <div className="w-full md:w-full lg:w-1/2 flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <div className="flex items-start justify-between">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
@@ -125,7 +126,16 @@ const Product: React.FC<ProductProps> = ({
               <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {formatPrice(price)}
               </span>
+              <div className="buttons flex gap-2">
+              <Link 
+                href={`/edit-product/${id}`}
+                className="flex items-center justify-center gap-2 py-2 px-5 m-auto rounded-md text-nowrap bg-blue-500 hover:bg-blue-600 transition duration-200 ease-in-out max-w-[114px] text-white"
+              >
+                <Pencil size={18}/>
+                Edit
+              </Link>
               <DeleteProduct id={id} />
+              </div>
             </div>
           </div>
         </div>

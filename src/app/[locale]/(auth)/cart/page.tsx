@@ -5,6 +5,7 @@ import { Trash2, Plus, Minus, ShoppingCart, CreditCard } from "lucide-react";
 import Loader from "../../../../components/Loader/Loader";
 import Image from "next/image";
 import { useCart } from "../../../Providers/Cart";
+import { Link } from "../../../../i18n/routing";
 
 interface CartItem {
   id: number;
@@ -104,7 +105,7 @@ export default function CartPage() {
   );
 
   return (
-    <div className="py-8 min-h-screen transition-colors duration-300 -mx-24">
+    <div className="py-8 min-h-screen w-full transition-colors duration-300 -mx-24">
       <div className="mx-auto">
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200 dark:border-gray-700">
           <h1 className="text-4xl font-bold text-gray-800 dark:text-white flex items-center">
@@ -129,7 +130,7 @@ export default function CartPage() {
               strokeWidth={1}
             />
             <p className="text-2xl font-semibold">Your cart is empty</p>
-            <p className="text-gray-400 mt-2">Explore our products and add some items!</p>
+            <p className="text-gray-400 mt-2">Explore our <Link href={'/products'} className="underline text-mediumGray dark:text-light">products</Link> and add some items!</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-[3fr,1fr] gap-8">

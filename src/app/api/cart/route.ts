@@ -79,7 +79,6 @@ export async function GET() {
   .from("cart")
   .select(`
     id, 
-    user_id, 
     quantity, 
     product:product_id (
       title, 
