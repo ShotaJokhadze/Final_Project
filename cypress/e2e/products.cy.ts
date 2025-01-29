@@ -36,7 +36,7 @@ describe('products', () => {
 
     cy.get(`[data-cy="product-card"]`).contains(uniqueTitle).parents('[data-cy="product-card"]').contains('View Product').click();
 
-    cy.contains('Delete').click();
+    cy.get('[data-cy="delete-product"]').click();
 
     cy.get('[data-cy="delete-product-modal"]').should('be.visible').contains('Product deleted successfully');
 

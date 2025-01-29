@@ -54,6 +54,7 @@ const DeleteProduct: React.FC<DeleteProductProps> = ({ id }) => {
           text-white rounded-md 
           transition duration-200 ease-in-out max-w-[114px]
         `}
+        data-cy='delete-product'
       >
         <Trash2 size={18} />
         {isDeleting ? 'Deleting...' : 'Delete'}
