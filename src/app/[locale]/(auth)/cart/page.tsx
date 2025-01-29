@@ -6,6 +6,7 @@ import Loader from "../../../../components/Loader/Loader";
 import Image from "next/image";
 import { useCart } from "../../../Providers/Cart";
 import { Link } from "../../../../i18n/routing";
+import { useLocale } from "next-intl";
 
 interface CartItem {
   id: number;
@@ -25,6 +26,7 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { cartItemCount, updateCartItemCount } = useCart();
+  const locale = useLocale();
 
   useEffect(() => {
     fetchCartItems();
@@ -96,6 +98,27 @@ export default function CartPage() {
       updateCartItemCount(cartItemCount - deletedItemQuantity);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
+    }
+  };
+
+  const handleCheckout = async () => {
+    try {
+
+      console.log(cartItems)
+      const response = await fetch(`${baseUrl}/api/checkout`, {
+        method: "POST",
+        body: JSON.stringify({ cartItems, locale }),
+      });
+  
+      const { url } = await response.json();
+      if (url) {
+        window.location.href = url;
+        setCartItems([]);
+        updateCartItemCount(0);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setError("Failed to initiate checkout");
     }
   };
 
@@ -221,7 +244,10 @@ export default function CartPage() {
                   </span>
                 </div>
               </div>
-              <button className="w-full mt-6 bg-blue-600 dark:bg-blue-500 text-white py-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-semibold text-lg flex items-center justify-center self-end">
+              <button
+                onClick={handleCheckout}
+                className="w-full mt-6 bg-blue-600 dark:bg-blue-500 text-white py-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-semibold text-lg flex items-center justify-center self-end"
+              >
                 <CreditCard className="mr-3" />
                 Checkout
               </button>

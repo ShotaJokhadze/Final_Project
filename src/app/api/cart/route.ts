@@ -83,7 +83,8 @@ export async function GET() {
     product:product_id (
       title, 
       price, 
-      image
+      image,
+      id
     )
   `)
   .eq("user_id", user_id);
