@@ -4,20 +4,17 @@ import { createClient } from "../../../../../utils/supabase/server";
 import { Link } from "../../../../../i18n/routing";
 import Stripe from "stripe";
 
-// interface OrderItem {
-//   product_name: string;
-//   quantity: number;
-//   unit_price: number;
-//   image?: string;
-// }
-
 export default async function SuccessPage({
   searchParams,
+  params, // Add params here
 }: {
   searchParams: { session_id: string };
+  params: { locale: string };
 }) {
+  const { locale } = params;
+
   if (!searchParams.session_id) {
-    redirect('/cart');
+    redirect(`${locale}/cart`)
   }
 
   const supabase = await createClient();
@@ -29,22 +26,19 @@ export default async function SuccessPage({
         expand: ['line_items','line_items.data.price.product', 'payment_intent'],
       }
     );
-    // console.log({'session': checkoutSession})
-
-    //payment_intent.id
-    //amount_total
-    //status
-    //lineItem.price?.product
-    
-    checkoutSession.line_items?.data.forEach((lineItem) => {
+    const orderItems = checkoutSession.line_items?.data.map((lineItem) => {
       const product = lineItem.price?.product as Stripe.Product;
-      console.log({
-        name: product.name, // Now TypeScript knows this exists
-        price: lineItem.price?.unit_amount, // Still in cents
-        metadata: product.metadata, // Now TypeScript knows this exists
-      });
-    });
+      return {
+        product_id: product.metadata.product_id,
+        product_name: product.name,
+        quantity: lineItem.quantity,
+        unit_price: lineItem.price?.unit_amount,
+        image: product.images?.[0] || null,
+      }
+    }) || [];
 
+    const paymentIntent = checkoutSession.payment_intent as Stripe.PaymentIntent;
+    const paymentIntentId = paymentIntent.id;
 
     const userResponse = await supabase.auth.getUser();
     const userId = userResponse.data.user?.id;
@@ -53,38 +47,41 @@ export default async function SuccessPage({
       throw new Error("User not authenticated");
     }
 
-    // Format order items
-    // const orderItems: OrderItem[] = checkoutSession.line_items?.data.map(item => ({
-    //   product_name: item.description || '',
-    //   quantity: item.quantity || 0,
-    //   unit_price: (item.price?.unit_amount || 0) / 100,
-    // })) || [];
+    const { data: existingOrder } = await supabase
+    .from('orders')
+    .select('id')
+    .eq('payment_intent_id', paymentIntentId)
+    .single();
 
-    // Create order record
-    // const { error: orderError } = await supabase
-    //   .from('orders')
-    //   .insert({
-    //     user_id: userId,
-    //     order_items: orderItems,
-    //     total_amount: totalAmount,
-    //     payment_intent_id: checkoutSession.payment_intent?.id,
-    //     status: 'completed',
-    //     created_at: new Date().toISOString()
-    //   });
+    if (existingOrder) {
+      console.log("Order already exists, skipping insertion.");
+    } else {
+      const { error: orderError } = await supabase
+        .from('orders')
+        .insert([{
+          user_id: userId,
+          order_items: orderItems,
+          total_amount: checkoutSession.amount_total,
+          payment_intent_id: paymentIntentId,
+          status: checkoutSession.payment_status,
+          created_at: new Date().toISOString(),
+        }]).single();
 
-    // if (orderError) {
-    //   throw orderError;
-    // }
+      if (orderError) {
+        console.error("Failed to insert order:", orderError);
+        throw orderError;
+      }
+    }
 
-    // Clear cart
-    // const { error: clearCartError } = await supabase
-    //   .from('cart_items')
-    //   .delete()
-    //   .eq('user_id', userId);
 
-    // if (clearCartError) {
-    //   console.error("Failed to clear cart:", clearCartError);
-    // }
+    const { error: clearCartError } = await supabase
+    .from('cart')
+    .delete()
+    .eq('user_id', userId);
+
+    if (clearCartError) {
+      console.error("Failed to clear cart:", clearCartError);
+    }
 
     return (
       <div className="flex flex-col items-center justify-center p-8">
@@ -129,6 +126,7 @@ export default async function SuccessPage({
     );
   } catch (error) {
     console.error('Error processing success page:', error);
-    redirect('/cart?error=processing_order');
+    const errorMessage = error instanceof Error ? error.message : "Something went wrong.";
+    redirect(`${locale}/error?message=${encodeURIComponent(errorMessage)}`);
   }
-}
+} 

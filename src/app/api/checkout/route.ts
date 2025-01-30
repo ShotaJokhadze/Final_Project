@@ -35,10 +35,10 @@ export async function POST(req: Request) {
             name: item.product.title,
             images: [item.product.image],
             metadata: {
-              product_id: String(item.product.id), // Fixed: Ensure correct object reference
+              product_id: String(item.product.id),
             },
           },
-          unit_amount: Math.round(item.product.price * 100), // Ensure correct format (cents)
+          unit_amount: item.product.price * 100,
         },
         quantity: item.quantity,
       })),
