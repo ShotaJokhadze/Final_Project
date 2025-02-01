@@ -105,8 +105,8 @@ export default function Header(): JSX.Element {
           />
           {cartItemCount > 0 && (
             <span className="absolute -top-2 -right-2 
-              bg-red text-white 
-              dark:bg-red dark:text-white 
+              bg-blue-600 text-white 
+              dark:bg-blue-600 dark:text-white 
               rounded-full text-xs w-5 h-5 
               flex items-center justify-center 
               group-hover:animate-none 

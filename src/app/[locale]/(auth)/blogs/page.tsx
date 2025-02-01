@@ -31,7 +31,6 @@ export default async function BlogsPage({ params,}: BlogsPageProps) {
 
   try {
     blogs = await fetchBlogs();
-    console.log(blogs)
   } catch (error) {
     fetchError = (error as Error).message;
   }

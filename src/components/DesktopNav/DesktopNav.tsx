@@ -10,7 +10,7 @@ export default function NavigationMenu({ navItems }: NavigationMenuProps): JSX.E
       {navItems.map((item) => (
         <li key={item.href} className="relative flex items-center h-full">
           <Link
-            className="block font-medium leading-6 transition-all hover:text-red"
+            className="block font-medium leading-6 transition-all hover:text-blue-600"
             href={item.href}
           >
             {item.label}
