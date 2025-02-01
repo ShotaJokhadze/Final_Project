@@ -27,19 +27,19 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
           </p>
         </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((testimonial: Testimonial) => (
               <div 
                 key={testimonial.id}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 text-center">
                   {testimonial.name}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 text-center">
                   {testimonial.feedback}
                 </p>
-                <div className="flex items-center">
+                <div className="flex items-center justify-center">
                   {[...Array(5)].map((_, i) => (
                     <span 
                       key={i} 

@@ -16,6 +16,8 @@ export default async function HomePage () {
   const { data: testimonials, error } = await supabase
     .from("testimonials")
     .select()
+    .order("rating", { ascending: false })
+    .limit(4);
 
   if (error) {
     console.error("Error fetching testimonials:", error);
