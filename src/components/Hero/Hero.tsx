@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import { Link } from '../../i18n/routing';
 
@@ -22,7 +24,7 @@ const HeroSection = () => {
               From everyday essentials to luxury items, find exactly what you&apos;re looking for.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-10">
-              <Link href='/products' className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 
+              <Link href={'/products'} className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 
                                bg-blue-600 hover:bg-blue-700 
                                dark:bg-blue-500 dark:hover:bg-blue-600
                                text-white font-semibold 

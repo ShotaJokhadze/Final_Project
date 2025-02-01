@@ -1,7 +1,5 @@
 import { FiLogOut, FiLogIn } from "react-icons/fi";
-import { FaUser } from "react-icons/fa";
 import Loader from "../Loader/Loader";
-import { Link } from "../../i18n/routing";
 
 interface AuthControlsProps {
   session: boolean | null;
@@ -18,11 +16,6 @@ export default function AuthControls({
 }: AuthControlsProps): JSX.Element {
   return (
     <>
-      <div>
-        <Link href="/profile">
-          <FaUser className="text-[35px]" />
-        </Link>
-      </div>
       {session === null ? (
         <div>
           <Loader />

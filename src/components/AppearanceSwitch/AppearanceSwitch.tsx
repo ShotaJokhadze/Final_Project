@@ -67,24 +67,24 @@ export default function AppearanceSwitch(): JSX.Element {
         <ul className="absolute top-full bg-mediumGray w-full text-light rounded-md">
           <li
             onClick={() => handleSelectTheme("light")}
-            className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
+            className="flex items-center sm:justify-center lg:justify-start gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
           >
-            <FiSun />
-            <p>{t("light")}</p>
+            <FiSun className="text-lg"/>
+            <p className="hidden lg:inline">{t("light")}</p>
           </li>
           <li
             onClick={() => handleSelectTheme("dark")}
-            className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
+            className="flex items-center  sm:justify-center lg:justify-start gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
           >
-            <FiMoon />
-            <p>{t("dark")}</p>
+            <FiMoon className="text-lg"/>
+            <p className="hidden lg:inline">{t("dark")}</p>
           </li>
           <li
             onClick={() => handleSelectTheme("system")}
-            className="flex items-center gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
+            className="flex items-center  sm:justify-center lg:justify-start gap-1 cursor-pointer p-2 hover:translate-x-1 transition-all"
           >
-            <FiMonitor />
-            <p>{t("system")}</p>
+            <FiMonitor className="text-lg text-center"/>
+            <p className="hidden lg:inline">{t("system")}</p>
           </li>
         </ul>
       )}

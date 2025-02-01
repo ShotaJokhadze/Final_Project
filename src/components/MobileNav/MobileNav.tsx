@@ -19,7 +19,7 @@ export default function MobileMenu({ isOpen, setIsOpen, navItems }: MobileMenuPr
 
       {/* Mobile Navigation */}
       <div
-        className={`xl:hidden fixed top-0 left-0 w-64 h-screen bg-darkGray dark:bg-light transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`xl:hidden fixed top-0 left-0 w-64 h-screen bg-zinc-100 dark:bg-zinc-900 transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -28,7 +28,7 @@ export default function MobileMenu({ isOpen, setIsOpen, navItems }: MobileMenuPr
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
-                  className="block font-medium leading-6 transition-all hover:text-red py-2"
+                  className="block font-medium leading-6 transition-all hover:text-blue-600 py-2"
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                 >
