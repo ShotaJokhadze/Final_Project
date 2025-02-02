@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useCart } from '../../app/Providers/Cart';
-import { Check, X } from "lucide-react";
+import { Check, X, ShoppingCart, Loader2 } from "lucide-react";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -39,7 +39,7 @@ export default function AddToCartButton({ productId }: { productId: number }) {
       }
 
       updateCartItemCount(cartItemCount + 1);
-      setMessage('Item added to your cart successfully!');
+      setMessage('Added to cart!');
       setShowModal(true);
     } catch (err) {
       setIsError(true);
@@ -56,35 +56,54 @@ export default function AddToCartButton({ productId }: { productId: number }) {
       <button
         onClick={handleAddToCart}
         disabled={loading}
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 w-[115px]"
+        className="inline-flex items-center justify-center gap-1 px-2 py-2.5 bg-green-500 hover:bg-green-600 disabled:bg-green-400 text-white font-medium rounded-lg transition-all duration-200 min-w-[124px] max-w-[140px] shadow-sm hover:shadow group disabled:cursor-not-allowed"
       >
-        {loading ? 'Adding...' : 'Add to Cart'}
+        {loading ? (
+          <>
+            <Loader2 className="h-5 w-5 animate-spin" />
+            <span>Adding...</span>
+          </>
+        ) : (
+          <>
+            <ShoppingCart className="h-5 w-5 transition-transform group-hover:scale-110" />
+            <span>Add to Cart</span>
+          </>
+        )}
       </button>
 
       {showModal && (
         <div 
-          className="fixed left-1/2 top-20 -translate-x-1/2 z-50"
+          className="fixed left-1/2 top-6 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-300"
           onClick={() => setShowModal(false)}
         >
           <div 
-            className={`flex items-center gap-2 p-3 rounded-lg shadow-lg ${
-              isError ? 'bg-red-100 border border-red-200' : 'bg-green-100 border border-green-200'
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border backdrop-blur-sm ${
+              isError 
+                ? 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20' 
+                : 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/20'
             }`}
           >
-            <div className="flex-shrink-0">
+            <div className={`flex-shrink-0 rounded-full p-1 ${
+              isError ? 'bg-red-100 dark:bg-red-500/20' : 'bg-green-100 dark:bg-green-500/20'
+            }`}>
               {isError ? (
-                <X className="h-5 w-5 text-red-500" />
+                <X className="h-4 w-4 text-red-600 dark:text-red-400" />
               ) : (
-                <Check className="h-5 w-5 text-green-500" />
+                <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
               )}
             </div>
-            <p className={`text-sm ${isError ? 'text-red-700' : 'text-green-700'}`}>
+            <p className={`text-sm font-medium ${
+              isError ? 'text-red-800 dark:text-red-200' : 'text-green-800 dark:text-green-200'
+            }`}>
               {message}
             </p>
             <button 
-              className="ml-auto flex-shrink-0 text-gray-400 hover:text-gray-500"
+              className="ml-auto flex-shrink-0 rounded-full p-1 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              aria-label="Close notification"
             >
-              <X className="h-4 w-4" />
+              <X className={`h-4 w-4 ${
+                isError ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'
+              }`} />
             </button>
           </div>
         </div>

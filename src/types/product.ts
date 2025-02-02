@@ -4,7 +4,7 @@ export interface Product {
   description: string;
   price: number;
   brand: string;
-  title_ge: string;
-  description_ge: string;
+  title_ge?: string;
+  description_ge?: string;
   image: string;
 }

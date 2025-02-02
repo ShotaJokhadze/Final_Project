@@ -12,7 +12,8 @@ export async function createProduct(inputData: FormData) {
   const title = inputData.get('title') as string;
   const description = inputData.get('description') as string;
   const price = Number(inputData.get('price'));
-  const brand = inputData.get('brand') as string;
+  const brandRaw = (inputData.get('brand')) as string;
+  const brand = brandRaw.toLowerCase();
   const image = inputData.get('image') as string;
   const title_ge = inputData.get('title_ge') as string;
   const description_ge = inputData.get('description_ge') as string;

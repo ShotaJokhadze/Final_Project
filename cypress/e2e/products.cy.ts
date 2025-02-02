@@ -21,7 +21,7 @@ describe('products', () => {
     cy.get('[data-cy="create-product-description"]').type('TestProductDescription');
     cy.get('[data-cy="create-product-price"]').type('123');
     cy.get('[data-cy="create-product-brand"]').type('TestBrand');
-    cy.get('[data-cy="create-product-image"]').type('https://cdn.dummyjson.com/products/images/smartphones/Vivo%20X21/1.png');
+    cy.get('[data-cy="create-product-image"]').type('https://cdn.dummyjson.com/products/images/mobile-accessories/Apple%20AirPods%20Max%20Silver/1.png');
     cy.get('[data-cy="create-product-button"]').click();
     
     cy.wait(1000);

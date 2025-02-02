@@ -32,7 +32,7 @@ export default async function LocaleLayout({
       <CartProvider> 
         <Header />
               <div className="hero flex-1 flex">
-                  <div className="hero-container min-h-full flex justify-center md:w-4/5 mx-auto max-w-screen-xl items-center">
+                  <div className="hero-container min-h-full flex justify-center w-4/5 mx-auto max-w-screen-xl items-center">
                     {children}
                   </div>
               </div>

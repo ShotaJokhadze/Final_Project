@@ -17,7 +17,7 @@ const Blog: React.FC<BlogProps> = (props) => {
  const localizedDescription = locale === 'ka' ? description_ge : description;
 
  return (
-   <div className="blog-card group relative w-full max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
+   <div className="blog-card group relative w-[90%] max-w-2xl mx-auto p-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
      
      <h2 className="blog-title font-bold text-2xl md:text-3xl text-gray-900 dark:text-gray-100 mb-4 pb-3 border-b border-gray-200 dark:border-gray-700 relative">

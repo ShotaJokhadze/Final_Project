@@ -17,7 +17,7 @@ function NavButton({ id, label, route }: NavButtonProps): JSX.Element {
   }
 
   return (
-    <button onClick={handleClick} className="bg-mediumGray text-light p-2 rounded-md text-center">
+    <button onClick={handleClick} className="bg-mediumGray text-light py-2.5 px-2 max-w-[140px] rounded-md text-center">
       {label}
     </button>
   );

@@ -48,11 +48,11 @@ const DeleteProduct: React.FC<DeleteProductProps> = ({ id }) => {
         onClick={handleDeleteProduct}
         disabled={isDeleting}
         className={`
-          flex items-center justify-center gap-2 
-          py-2 px-5 m-auto 
+          inline-flex items-center justify-center gap-2 
+          py-2.5 px-2 m-auto 
           ${isDeleting ? 'bg-gray-400 cursor-not-allowed' : 'bg-red hover:bg-darkRed'}
           text-white rounded-md 
-          transition duration-200 ease-in-out max-w-[114px]
+          transition duration-200 ease-in-out w-full
         `}
         data-cy='delete-product'
       >
