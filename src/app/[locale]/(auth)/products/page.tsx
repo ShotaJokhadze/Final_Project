@@ -114,6 +114,7 @@ export default function ProductsPage({ params }: ProductsPageProps) {
         <Link 
           className="bg-mediumGray text-light rounded-md p-3 hover:bg-gray-900 transition-all text-center lg:ml-auto"  
           href={`/${locale}/create-product`}
+          data-cy='create-product-link'
         >
           Create Product
         </Link>
@@ -133,7 +134,8 @@ export default function ProductsPage({ params }: ProductsPageProps) {
           <div className="card-container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center place-content-start min-h-[600px]">
             {products.length > 0 ? (
               products.map((product) => (
-                <div key={product.id} className="card w-full max-w-[300px] border border-mediumGray relative h-[390px] flex flex-col justify-around gap-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors duration-300 overflow-hidden">
+                <div key={product.id} className="card w-full max-w-[300px] border border-mediumGray relative h-[390px] flex flex-col justify-around gap-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors duration-300 overflow-hidden"
+                data-cy='product-card'>
                   <Card
                     id={product.id}
                     title={getLocalizedText(product.title_ge ?? null, product.title)}
@@ -141,6 +143,7 @@ export default function ProductsPage({ params }: ProductsPageProps) {
                     price={product.price}
                     brand={product.brand}
                     image={product.image}
+                    data-cy={`product-card-${product.title}`}
                   />
                 </div>
               ))

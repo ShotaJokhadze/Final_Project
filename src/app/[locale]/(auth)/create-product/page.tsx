@@ -60,7 +60,7 @@ export default function CreateProduct() {
 
     // Georgian validation
     if (addGeorgian) {
-      if (!formData.title_ge.trim()) newErrors.title_ge = 'Georgian title is required';
+      if (!formData.title_ge?.trim()) newErrors.title_ge = 'Georgian title is required';
     }
 
     setErrors(newErrors);
