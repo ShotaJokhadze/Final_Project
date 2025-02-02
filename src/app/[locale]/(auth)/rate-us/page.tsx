@@ -55,7 +55,7 @@ export default function RateUs() {
   };
 
   return (
-    <div className="w-1/2 relative">
+    <div className="lg:w-1/2 relative">
       <div className="w-full p-8">
         <form
           onSubmit={handleSubmit}
