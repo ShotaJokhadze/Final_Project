@@ -6,15 +6,16 @@ import { createClient } from "../../utils/supabase/client"
 import { Link } from "../../i18n/routing"
 
 
-interface UserData {
-  id: string
-  email: string | undefined
-  full_name: string
-  user_name: string
-  phone: string
-  avatar_url: string
-  last_sign_in_at: string | null
+export interface UserData {
+  id: string;
+  email: string | undefined;
+  full_name: string;
+  user_name: string;
+  phone: string;
+  avatar_url: string;
+  last_sign_in_at: string | null | undefined; // Allow undefined
 }
+
 
 interface ProfileFormProps {
   initialData: UserData
