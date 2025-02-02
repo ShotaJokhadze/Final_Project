@@ -26,6 +26,7 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { cartItemCount, updateCartItemCount } = useCart();
+  const [checkingOut, setCheckingOut] = useState(false);
   const locale = useLocale();
 
   useEffect(() => {
@@ -102,6 +103,8 @@ export default function CartPage() {
   };
 
   const handleCheckout = async () => {
+    setCheckingOut(true); // Show loader
+  
     try {
       const response = await fetch(`${baseUrl}/api/checkout`, {
         method: "POST",
@@ -111,12 +114,12 @@ export default function CartPage() {
       const { url } = await response.json();
       if (url) {
         window.location.href = url;
-        setCartItems([]);
-        updateCartItemCount(0);
       }
     } catch (error) {
       console.error("Checkout error:", error);
       setError("Failed to initiate checkout");
+    } finally {
+      setCheckingOut(false); // Hide loader if error occurs
     }
   };
 
@@ -245,10 +248,12 @@ export default function CartPage() {
               </div>
               <button
                 onClick={handleCheckout}
-                className="w-full mt-6 bg-blue-600 dark:bg-blue-500 text-white py-3 sm:py-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-semibold text-base sm:text-lg flex items-center justify-center"
+                disabled={checkingOut} // Disable button during checkout
+                className={`w-full mt-6 bg-blue-600 dark:bg-blue-500 text-white py-3 sm:py-4 rounded-lg 
+                  ${checkingOut ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-700 dark:hover:bg-blue-600"} 
+                  transition-colors font-semibold text-base sm:text-lg flex items-center justify-center`}
               >
-                <CreditCard className="mr-3" />
-                Checkout
+                {checkingOut ? <Loader /> : <><CreditCard className="mr-3" /> Checkout</>}
               </button>
             </div>
           </div>

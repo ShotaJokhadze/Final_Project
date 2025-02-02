@@ -47,7 +47,7 @@ export async function middleware(req: NextRequest) {
   // If no session and the user is trying to access a restricted page, redirect to login
   if (!session && !isLoginPage && isRestrictedPage) {
     const locale = req.nextUrl.pathname.startsWith("/ka") ? "ka" : "en";
-    const loginUrl = new URL(`/${locale}/login`, req.url);
+    const loginUrl = new URL(`/${locale}/protected-page`, req.url);
     return NextResponse.redirect(loginUrl); // Redirect to login page
   }
 

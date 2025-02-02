@@ -33,6 +33,30 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+    if (!/[A-Z]/.test(password)) {
+      return NextResponse.json(
+        { error: "Password must contain at least one uppercase letter." },
+        { status: 400 }
+      );
+    }
+    if (!/[a-z]/.test(password)) {
+      return NextResponse.json(
+        { error: "Password must contain at least one lowercase letter." },
+        { status: 400 }
+      );
+    }
+    if (!/\d/.test(password)) {
+      return NextResponse.json(
+        { error: "Password must contain at least one number." },
+        { status: 400 }
+      );
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return NextResponse.json(
+        { error: "Password must contain at least one special character." },
+        { status: 400 }
+      );
+    }
 
     const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
