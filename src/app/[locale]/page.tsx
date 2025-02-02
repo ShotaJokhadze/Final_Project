@@ -20,7 +20,7 @@ export default async function HomePage () {
 
   const {data: products, error: productError } = await supabase
   .from('products')
-  .select('title, description, title_ge, description_ge, image, price, id')
+  .select('title, description, title_ge, description_ge, image, price, id, brand')
   .order('created_at', { ascending: false })
   .limit(3)
 

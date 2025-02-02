@@ -45,7 +45,7 @@ export default function CreateProduct() {
     
     if (!formData.title.trim()) newErrors.title = 'Title is required';
     if (!formData.description.trim()) newErrors.description = 'Description is required';
-    if (!formData.brand.trim()) newErrors.brand = 'Brand is required';
+    if (!formData.brand?.trim()) newErrors.brand = 'Brand is required';
     if (!formData.image.trim()) newErrors.image = 'Image URL is required';
     
     if (!formData.price) {

@@ -88,7 +88,7 @@ export default function EditProduct({params}: EditProductProps){
     if (!formData.title.trim()) newErrors.title = 'Title is required';
     if (!formData.description.trim()) newErrors.description = 'Description is required';
     if (!formData.price) newErrors.price = 'Price is required';
-    if (!formData.brand.trim()) newErrors.brand = 'Brand is required'
+    if (!formData.brand?.trim()) newErrors.brand = 'Brand is required'
     if (!formData.image.trim()) newErrors.image = 'Image is required'
 
     if (addGeorgian) {
