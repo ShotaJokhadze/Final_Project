@@ -4,27 +4,6 @@ import { BlogType } from "../../../../../types/blogs";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${baseUrl}/api/blogs`);
-
-    if (!res.ok) {
-      console.error("Failed to fetch blog posts");
-      return [];
-    }
-
-    const data: BlogType[] = await res.json();
-
-    return data.map((post) => ({
-      id: post.id.toString(),
-    }));
-  } catch (error) {
-    console.error("Error fetching blog posts:", error);
-    return [];
-  }
-}
-
-
 async function getBlogPost(id: string): Promise<BlogType> {
   const res = await fetch(`${baseUrl}/api/blogs/${id}`, {
     cache : 'no-store'
