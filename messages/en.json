@@ -1,6 +1,37 @@
 {
-  "HomePage": {
-    "title": "This is home page"
+  "hero": {
+    "title": "Discover our Latest Collection",
+    "subtitle": "of Premium Products",
+    "description": "Experience unmatched quality and style with our carefully curated selection. From everyday essentials to luxury items, find exactly what you&apos;re looking for.",
+    "shop_now": "Shop Now"
+  },
+  "why_us": {
+    "title": "Why Choose Us",
+    "description": "We're committed to providing the best shopping experience with unmatched quality and service.",
+    "features": {
+      "feature1": {
+        "title": "Quality Guaranteed",
+        "description": "We stand behind every product with our satisfaction guarantee and rigorous quality control standards."
+      },
+      "feature2": {
+        "title": "24/7 Support",
+        "description": "Our dedicated customer service team is available around the clock to assist you with any questions or concerns."
+      },
+      "feature3": {
+        "title": "Secure Payments",
+        "description": "Shop with confidence using our encrypted payment system that supports all major payment methods."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "description": "See what our customers have to say about us.",
+    "rate_us": "rate us"
+  },
+  "protected": {
+    "title": "Access Restricted",
+    "description": "Please log in to view this content.",
+    "login": "Go to Login"
   },
   "Header": {
     "about": "About",

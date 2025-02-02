@@ -2,8 +2,11 @@
 
 import React from 'react';
 import { Link } from '../../i18n/routing';
+import { useTranslations } from 'next-intl';
 
 const HeroSection = () => {
+  const t = useTranslations('hero');
+
   return (
     <section className="w-full bg-[#d4d4dc] dark:bg-[#1d1e22]">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -12,16 +15,15 @@ const HeroSection = () => {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold 
                          text-gray-900 dark:text-white
                          leading-tight sm:leading-tight md:leading-tight">
-              Discover our Latest Collection
+              {t('title')}
               <span className="block text-blue-600 dark:text-blue-400 mt-2">
-                of Premium Products
+                {t('subtitle')}
               </span>
             </h1>
             <p className="text-sm sm:text-base lg:text-lg 
                          text-gray-600 dark:text-gray-300
                          max-w-2xl mx-auto">
-              Experience unmatched quality and style with our carefully curated selection. 
-              From everyday essentials to luxury items, find exactly what you&apos;re looking for.
+              {t('description')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-10">
               <Link href={'/products'} className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 
@@ -31,7 +33,7 @@ const HeroSection = () => {
                                rounded-lg sm:rounded-xl
                                transition-all duration-300 
                                text-sm sm:text-base">
-                Shop Now
+                {t('shop_now')}
               </Link>
             </div>
           </div>

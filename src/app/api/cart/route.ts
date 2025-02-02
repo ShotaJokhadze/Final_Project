@@ -67,10 +67,7 @@ export async function GET() {
   const { data: userResponse, error: userError } = await supabase.auth.getUser();
 
   if (userError || !userResponse?.user) {
-    return NextResponse.json(
-      { error: "User not logged in or could not be authenticated" },
-      { status: 401 }
-    );
+    return NextResponse.json([], { status: 200 });
   }
 
   const user_id = userResponse.user.id;

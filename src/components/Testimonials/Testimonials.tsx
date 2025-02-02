@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 interface Testimonial {
@@ -14,16 +14,17 @@ interface Testimonial {
 
 export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   const locale = useLocale();
+  const t = useTranslations('testimonials');
 
   return (
     <section className="py-12">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-            Testimonials
+            {t('title')}
           </h2>
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mt-3 max-w-2xl mx-auto">
-            See what our customers have to say about us.
+            {t('description')}
           </p>
         </div>
 
@@ -59,7 +60,7 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
             href={`/${locale}/rate-us`}
             className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
           >
-            Rate Us
+            {t('rate_us')}
           </Link>
         </div>
       </div>
