@@ -13,7 +13,8 @@ export default async function OrdersPage() {
   const { data: orders, error } = await supabase
     .from("orders")
     .select()
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .order('created_at', {ascending: false});
 
   if (error) {
     console.error("Error fetching orders:", error);

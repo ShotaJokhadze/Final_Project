@@ -92,7 +92,7 @@ export default function EditProduct({params}: EditProductProps){
     if (!formData.image.trim()) newErrors.image = 'Image is required'
 
     if (addGeorgian) {
-      if (!formData.title_ge.trim()) newErrors.title_ge = 'Georgian title is required';
+      if (!formData.title_ge?.trim()) newErrors.title_ge = 'Georgian title is required';
     }
 
     setErrors(newErrors);
