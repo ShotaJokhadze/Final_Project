@@ -13,9 +13,6 @@ interface BlogCardProps {
 
 export default function BlogCard({ post, title, description, tag }: BlogCardProps) {
   return (
-    <div
-    className="card w-full max-w-[300px] border border-gray-200 dark:border-gray-700 relative flex flex-col justify-between bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-   >
     <div className="p-4 flex flex-col h-full">
       <h2 className="text-xl font-semibold text-gray-900 dark:text-white text-center mb-2 truncate">{title}</h2>
       <span className="text-sm bg-blue-100 dark:bg-blue-600 text-blue-700 dark:text-white px-2 py-1 rounded-full self-center mb-3">
@@ -28,6 +25,5 @@ export default function BlogCard({ post, title, description, tag }: BlogCardProp
         <PostsButton id={post.id} />
       </div>
     </div>
-   </div>
   );
 }
