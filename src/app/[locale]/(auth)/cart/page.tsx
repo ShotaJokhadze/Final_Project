@@ -127,7 +127,7 @@ export default function CartPage() {
 
   return (
     <div className="py-8 min-h-screen w-full transition-colors duration-300 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-between mb-8 pb-4 border-b border-gray-200 dark:border-gray-700">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white flex items-center mb-4 sm:mb-0">
             <ShoppingCart className="mr-4 text-blue-600 dark:text-blue-400" size={32} />
@@ -154,7 +154,7 @@ export default function CartPage() {
             <p className="text-gray-400 mt-2">Explore our <Link href={'/products'} className="underline text-mediumGray dark:text-light">products</Link> and add some items!</p>
           </div>
         ) : (
-          <div className="grid lg:grid-cols-[2fr,1fr] gap-6 lg:gap-8">
+          <div className="grid xl:grid-cols-[2fr,1fr] gap-6 lg:gap-8">
             <div className="space-y-6">
               {cartItems.map((item) => (
                 <div

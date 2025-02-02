@@ -7,18 +7,18 @@ import { Link } from '../../i18n/routing';
 
 export default function ProductsSlider({ products }: { products: Product[] }) {
   return (
-    <div className="flex gap-6 items-center justify-center p-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center w-4/5 mx-auto gap-6">
       {products.map((product) => (
         <div 
           key={product.id} 
-          className="flex flex-col min-w-[280px] border border-gray-300 rounded-xl p-4 shadow-lg hover:shadow-xl snap-start dark:bg-zinc-900 dark:text-zinc-100 bg-white text-gray-900 hover:scale-105 transform transition-transform duration-500 ease-out"
+          className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md sm:mx-2 hover:shadow-lg w-full"
         >
-          <div className="relative h-48 w-full mb-6 overflow-hidden rounded-lg shadow-md">
+          <div className="relative h-48 w-full mb-6 overflow-hidden rounded-lg">
             <Image 
               src={product.image} 
               alt={product.title} 
               fill
-              className="w-full h-full object-contain transform hover:scale-110 transition-all duration-300"
+              className="w-full h-full object-contain transform"
             />
           </div>
           
