@@ -25,10 +25,8 @@ export async function middleware(req: NextRequest) {
   const isForgotPasswordPage = req.nextUrl.pathname.includes("/forgot-password");
   const isResetPasswordPage = req.nextUrl.pathname.includes("/reset-password");
   const isRestrictedPage = [
-    "/contact",
     "/profile",
     "/blogs",
-    "/about",
     "/products",
     '/create-product',
     '/create-blog',
