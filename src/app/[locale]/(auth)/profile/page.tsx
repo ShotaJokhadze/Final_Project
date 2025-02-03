@@ -8,19 +8,18 @@ export interface UserData {
   user_name: string;
   phone: string;
   avatar_url: string;
-  last_sign_in_at: string | null | undefined; // Allow undefined
+  last_sign_in_at: string | undefined;
 }
-
-
 
 export default async function ProfilePage() {
   const supabase = await createClient();
-  const { data: { user }, error } = await supabase.auth.getUser()
+  const { data: { user }, error } = await supabase.auth.getUser();
 
-  console.log("Server side - User:", user) // Add this
-  console.log("Server side - Error:", error) // Add this
+  if (error) {
+    return <div className="text-center p-4">Error loading profile</div>;
+  }
 
-  if (error || !user) {
+  if (!user) {
     return <div>Not authenticated</div>
   }
 
@@ -31,9 +30,8 @@ export default async function ProfilePage() {
     user_name: user.user_metadata?.user_name || "",
     phone: user.user_metadata?.phone || "",
     avatar_url: user.user_metadata?.avatar_url || "",
-    last_sign_in_at: user.last_sign_in_at as string | null
+    last_sign_in_at: user.last_sign_in_at
   };
-  
 
   return (
     <div className="min-h-screen flex items-center py-12">
@@ -43,5 +41,5 @@ export default async function ProfilePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -22,8 +22,8 @@ This is a full-featured e-commerce web application built with **Next.js**, **Sup
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/ShotaJokhadze/Homework1.git
+   cd Homework1
    ```
 2. Install dependencies:
    ```sh

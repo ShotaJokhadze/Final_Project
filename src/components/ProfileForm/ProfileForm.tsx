@@ -53,7 +53,7 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
   return (
     <>
       {/* Header Section */}
-      <div className="px-8 pt-8">
+      <div className="px-4 pt-8">
         <div className="flex items-center gap-6">
           <div className="relative shrink-0">
             {initialData.avatar_url ? (

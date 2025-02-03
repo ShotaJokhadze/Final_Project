@@ -28,7 +28,7 @@ const Blog: React.FC<BlogProps> = (props) => {
        {localizedDescription || description}
      </p>
      
-     <div className="blog-footer flex justify-between items-center">
+     <div className="blog-footer flex justify-between items-center flex-wrap gap-2 md:flex-nowrap">
        <span className="blog-tag flex items-center px-3 py-1 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm font-medium tracking-wide uppercase">
          <Tag size={14} className="mr-2" />
          {tag}
