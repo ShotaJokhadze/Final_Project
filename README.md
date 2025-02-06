@@ -1,6 +1,6 @@
 # 🛒 E-Commerce Website
 
-This is a full-featured e-commerce web application built with **Next.js**, **Supabase**, **Stripe**, and **Tailwind CSS**. It includes a shopping cart, authentication, and a checkout process.
+This is a full-featured e-commerce web application built with **Next.js**, **Supabase**, **Stripe**, **Nodemailer**, and **Tailwind CSS**. It includes a shopping cart, authentication, a checkout process, and email notifications.
 
 ## 🚀 Features
 
@@ -8,6 +8,7 @@ This is a full-featured e-commerce web application built with **Next.js**, **Sup
 - 🛒 Shopping cart management
 - 🔑 User authentication (Supabase)
 - 💳 Secure payments with **Stripe**
+- 📧 Email notifications with **Nodemailer**
 - 🌍 Multi-language support with `next-intl`
 - 🌟 Responsive & dark mode support
 
@@ -16,6 +17,7 @@ This is a full-featured e-commerce web application built with **Next.js**, **Sup
 - **Frontend:** Next.js (App Router), React, Tailwind CSS
 - **Backend:** Supabase (PostgreSQL, Auth)
 - **Payments:** Stripe
+- **Emails:** Nodemailer
 - **Deployment:** Vercel
 
 ## 📦 Installation
@@ -35,7 +37,11 @@ This is a full-featured e-commerce web application built with **Next.js**, **Sup
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
    NEXT_PUBLIC_SITE_URL=http://localhost:3000
    STRIPE_SECRET_KEY=your-stripe-secret-key
-   STRIPE_PUBLIC_KEY=your-stripe-public-key
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-public-key
+   EMAIL_HOST=smtp.your-email-provider.com
+   EMAIL_PORT=your-email-port
+   EMAIL_USER=your-email@example.com
+   EMAIL_PASS=your-email-password
    ```
 4. Start the development server:
    ```sh
@@ -49,6 +55,13 @@ This is a full-featured e-commerce web application built with **Next.js**, **Sup
 2. Get your **Publishable Key** and **Secret Key** from the Stripe dashboard.
 3. Add them to your `.env.local` file.
 4. Make sure your **webhooks** are correctly set up to handle payment confirmations.
+
+## 📧 Nodemailer Integration
+
+1. Set up an email provider (e.g., Gmail, SendGrid, Mailgun).
+2. Get SMTP credentials (host, port, username, and password).
+3. Add them to your `.env.local` file.
+4. Implement email sending logic in your app to notify users about order confirmations, shipping updates, etc.
 
 ## 🚀 Deployment
 
@@ -68,3 +81,7 @@ Ensure you set up the following in **Vercel** or **`.env.local`**:
 - `NEXT_PUBLIC_SITE_URL`
 - `STRIPE_SECRET_KEY`
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+- `EMAIL_HOST`
+- `EMAIL_PORT`
+- `EMAIL_USER`
+- `EMAIL_PASS`
